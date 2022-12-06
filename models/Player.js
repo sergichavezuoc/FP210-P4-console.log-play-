@@ -2,9 +2,9 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var jugadoresSchema = new Schema({
-  Name: String, 
-  Username: String, 
-  Password: String
+  name: String, 
+  username: String, 
+  password: String
 })
 
 var Players = mongoose.model('Jugadores', jugadoresSchema)

@@ -4,12 +4,12 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var gameSchema = new Schema({
-  Number: Number, 
-  Room: String, 
-  Result: Number,
-  Winner: String,
-  Player1: String,
-  Player2: String 
+  number: Number, 
+  room: String, 
+  result: Number,
+  winner: String,
+  player1: String,
+  player2: String 
 })
 
 var Games = mongoose.model('Games', gameSchema)

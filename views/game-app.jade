@@ -4,6 +4,8 @@ block content
     #wrapper-main 
         .wrapper-header
             .wrapper-log-out
+                span#profile
+                    buton#profileshow(style='color: white; padding-left: 5px') Update profile&nbsp;&nbsp;
                 span#log-out
                     | Log out
                     i.fa.fa-sign-out.fa-lg(style='color: white; padding-left: 5px')        
@@ -65,7 +67,29 @@ block content
                             i#oroom3(style='')
                         #room3.room(ondrop='drop(event)' ondragover='allowDrop(event)')
                         .wrapper-foot
-                            i#room3f  
+                            i#room3f 
+    #myModalform.modal.fade(role='dialog')
+        .modal-dialog
+            .modal-content
+                .modal-header(style='background-color:rgb(174, 253, 140)')
+                    button.close(type='button' data-dismiss='modal') ×
+                    h4.modal-title Console.log(play)
+                .modal-body(style='background-color:#ffffe6')
+                    form#updateProfile
+                        .mb-3.row
+                        label.col-sm-2.col-form-label(style='color: #000') Name
+                        .col-sm-9.px-4 
+                        input#name.form-control(type=text name="name")
+                        .mb-3.row
+                        label.col-sm-2.col-form-label(style='color: #000') Email
+                        .col-sm-9.px-4 
+                        input#username.form-control(type=text name="username")
+                        .mb-3.row 
+                        label.col-sm-2.col-form-label(style='color: #000') Password
+                        .col-sm-9.px-4 
+                        input#password.form-control(type=text name="password")
+                        .d-grip.gap-2
+                        button#profileshow.btn.btn-primary.btn-outline-warning Update Profile                             
     #myModal.modal.fade(role='dialog')
         .modal-dialog
             .modal-content

@@ -55,7 +55,7 @@ create: function(req, res) {
 },
 update: function(req, res) {
   var id = req.params.id
-  Players.findOne({_id: id}, function(err, player){
+  Players.findOne({username: id}, function(err, player){
     if(err) {
       return res.status(500).json({
         message: 'Se ha producido un error al guardar la player',
@@ -67,9 +67,9 @@ update: function(req, res) {
         message: 'No hemos encontrado la player'
       })
     }
-    player.Name = req.body.name
-    player.Username =  req.body.username
-    player.Password = req.body.password
+    player.name = req.body.name
+    player.username =  req.body.username
+    player.password = req.body.password
     player.save(function(err, player){
       if(err) {
         return res.status(500).json({

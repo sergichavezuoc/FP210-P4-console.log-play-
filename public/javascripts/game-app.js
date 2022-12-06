@@ -5,6 +5,9 @@ var mymodal = $('myModal');
 $('#myModal').on('click', 'button.close', function (eventObject) {
     $('#myModal').modal('hide');
 });
+$('#myModalform').on('click', 'button.close', function (eventObject) {
+    $('#myModalform').modal('hide');
+});
 
 //DATA LOCALSTORAGE
 var user = JSON.parse(localStorage.getItem('User'));
@@ -13,7 +16,8 @@ var avatar = document.getElementById("avatarChoose");
 var userName = document.getElementById("user-name");
 userName.innerHTML = "Hi" + ' ' + user.name.toLowerCase();
 avatar.src = user.avatar;
-
+document.getElementById("username").value=user.username;
+document.getElementById("name").value=user.name;
 //LOG OUT
 var logOut = document.getElementById("log-out");
 logOut.addEventListener("click", function () {
@@ -51,7 +55,31 @@ function entrar(id) {
     document.getElementById(id).style.backgroundColor = "rgb(58, 140, 255)";
     document.getElementById("avatarChoose").setAttribute('draggable', true);
 }
+var boton = document.querySelector("#profileshow");
 
+boton.addEventListener('click', function () {
+    $("#myModalform").modal("show");
+})
+function handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const value = Object.fromEntries(data.entries());
+    console.log(JSON.stringify(value, null, '  '));
+    $.ajax({
+        url: '/api/player/'+user.username,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(value, null, '  '),
+        success: (data) => {
+            console.log(data);
+ 
+        }
+    
+    
+});
+  }
+  const form = document.getElementById("updateProfile");
+  form.addEventListener('submit', handleSubmit);
 /**
 * Manage the actions triggered by dropping the avatar into a room. First checks if the room is full and alert the user, if the room has space then the room is selected.
 * @param  {Event} ev event that trigger the function
