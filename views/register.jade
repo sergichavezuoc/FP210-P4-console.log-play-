@@ -23,26 +23,27 @@ block content
                             img#item-7.avatar(src="/images/monstrua.png", alt="")
                         .avatar-item 
                             img#item-8.avatar(src="/images/monstruo.png", alt="")
-            .mb-3 
-                .avatar-wrapper 
-                    #avatar-picker.avatar-content 
-                        img#avatarChoose.avatar(src="/images/guerrera.png", alt="")
-                .mb-3.row 
-                    label.col-sm-2.col-form-label.text-light Name 
-                    .col-sm-9.px-4 
-                        input#name.form-control(type=text name=name)
-                .mb-3.row 
-                    label.col-sm-2.col-form-label.text-light Email 
-                    .col-sm-9.px-4 
-                        input#email.form-control(type=text name=email)
-                .mb-3.row 
-                    label.col-sm-2.col-form-label.text-light Password
-                    .col-sm-9.px-4 
-                        input#password.form-control(type=text name=password)
-                .d-grip.gap-2 
-                    button#submit-button.btn.btn-primary.btn-outline-warning.btn.block(type="submit") Sign up 
-                #helper.helper-wrapper 
-                    .helper-content 
-                        p.text-helper The data entered is incorrect
+            .mb-3
+                form#registerform 
+                    .avatar-wrapper 
+                        #avatar-picker.avatar-content 
+                            img#avatarChoose.avatar(src="/images/guerrera.png", alt="")
+                    .mb-3.row 
+                        label.col-sm-2.col-form-label.text-light Name 
+                        .col-sm-9.px-4 
+                            input#name.form-control(type="text" name="name")
+                    .mb-3.row 
+                        label.col-sm-2.col-form-label.text-light Email 
+                        .col-sm-9.px-4 
+                            input#email.form-control(type="text" name="username")
+                    .mb-3.row 
+                        label.col-sm-2.col-form-label.text-light Password
+                        .col-sm-9.px-4 
+                            input#password.form-control(type="text" name="password")
+                    .d-grip.gap-2 
+                        button#submit-button.btn.btn-primary.btn-outline-warning.btn.block(type="submit") Sign up 
+                    #helper.helper-wrapper 
+                        .helper-content 
+                            p.text-helper The data entered is incorrect
 block scripts 
     script(src="/javascripts/register.js")   

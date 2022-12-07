@@ -65,21 +65,42 @@ function handleSubmit(event) {
     const data = new FormData(event.target);
     const value = Object.fromEntries(data.entries());
     console.log(JSON.stringify(value, null, '  '));
-    $.ajax({
+    var request = $.ajax({
         url: '/api/player/'+user.username,
         type: 'PUT',
         contentType: 'application/json',
         data: JSON.stringify(value, null, '  '),
         success: (data) => {
             console.log(data);
+                $("#myModalformcontent").html("Profile Updated!");
  
-        }
-    
-    
+        }   
 });
+request.fail(function() {
+    alert( "Update profile failed");
+  });
   }
   const form = document.getElementById("updateProfile");
   form.addEventListener('submit', handleSubmit);
+
+  function deleteProfile() {
+    if (window.confirm("Do you really want to delete your profile?")){
+    $.ajax({
+        url: '/api/player/'+user.username,
+        type: 'DELETE',
+        success: (data) => {
+            console.log(data);
+            window.alert("Profile deleted");
+            window.location.assign("/")
+        },  
+        error: () => {
+        window.alert("Error deleting profile");
+        } 
+});
+}
+  };
+  const deleteprofile = document.getElementById("deleteprofile");
+  deleteprofile.addEventListener('click', deleteProfile);
 /**
 * Manage the actions triggered by dropping the avatar into a room. First checks if the room is full and alert the user, if the room has space then the room is selected.
 * @param  {Event} ev event that trigger the function
@@ -87,6 +108,7 @@ function handleSubmit(event) {
 function drop(ev) {
     var data = ev.dataTransfer.getData("text");
     if (ev.target.id != "user-name") {
+        
         fetch('/ocupation?room=' + ev.target.id + '&user=' + user.username).then(response => {
             if (response.ok) {
                 document.getElementById("alert-text").innerHTML = 'Welcome to the room';

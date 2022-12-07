@@ -64,38 +64,38 @@
         }
 
         //SUBMIT REGISTER
-
-        var submitButton = document.getElementById("submit-button");
-
-        submitButton.addEventListener("click", function () {
+        function handleSubmit(event) {
+            event.preventDefault();
+            const data = new FormData(event.target);
+            const value = Object.fromEntries(data.entries());
+            console.log(JSON.stringify(value, null, '  '));
             var username = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
             var name = document.getElementById('name').value;
-
-            fetch('/validated-register', {
-                method: 'POST',
-                headers: { 'content-type': 'application/json' },
-                body: JSON.stringify({
-                    name: name,
-                    username: username,
-                    password: password
-                })
-            }).then(response => {
-                if (response.ok) {
-                    var newObject = {
-                        'name': name,
-                        'username': username,
-                        'avatar': avatarChoose.src.replace('http://localhost:8888', ''),
-                        'isLogged': false,
-                        'room1': false,
-                        'room2': false,
-                        'room3': false
+            $.ajax({
+                url: '/api/player/',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(value, null, '  '),
+                success: (data) => {
+                    console.log(data);
+                    if (data.message=="saved") {
+                        var newObject = {
+                            'name': name,
+                            'username': username,
+                            'avatar': avatarChoose.src.replace('http://localhost:8888', ''),
+                            'isLogged': false,
+                            'room1': false,
+                            'room2': false,
+                            'room3': false
+                        }
+                        localStorage.setItem('User', JSON.stringify(newObject))
+                        window.location.assign("/")
+                    } else {
+                        document.getElementById('helper').style.visibility = "visible";
                     }
-                    localStorage.setItem('User', JSON.stringify(newObject))
-                    window.location.assign("/")
-                } else {
-                    document.getElementById('helper').style.visibility = "visible"
-                }
-            })
-            
-        })
+         
+                }   
+        });
+          }
+          const form = document.getElementById("registerform");
+          form.addEventListener('submit', handleSubmit);

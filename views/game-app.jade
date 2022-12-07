@@ -4,8 +4,12 @@ block content
     #wrapper-main 
         .wrapper-header
             .wrapper-log-out
+                span#results
+                    buton#showresults(style='color: white; padding-left: 5px') Show Results&nbsp;&nbsp;
                 span#profile
                     buton#profileshow(style='color: white; padding-left: 5px') Update profile&nbsp;&nbsp;
+                span#dprofile
+                    buton#deleteprofile(style='color: white; padding-left: 5px') Delete profile&nbsp;&nbsp;
                 span#log-out
                     | Log out
                     i.fa.fa-sign-out.fa-lg(style='color: white; padding-left: 5px')        
@@ -75,6 +79,7 @@ block content
                     button.close(type='button' data-dismiss='modal') ×
                     h4.modal-title Console.log(play)
                 .modal-body(style='background-color:#ffffe6')
+                    p#myModalformcontent
                     form#updateProfile
                         .mb-3.row
                         label.col-sm-2.col-form-label(style='color: #000') Name
@@ -102,4 +107,5 @@ block content
 block scripts
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js") 
     script(src="/javascripts/game-app.js")
+    script(src="/javascripts/ajaxResults.js")
     

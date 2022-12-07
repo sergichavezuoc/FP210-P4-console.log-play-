@@ -17,7 +17,17 @@ block content
       .d-grip.gap-2
         button#login.btn.btn-primary.btn-outline-warning Log in
       .wrapper-register-login 
-        p Don't have account? <a href="/register">Create one</a> 
-      div#results
+        p Don't have account? <a href="/register">Create one</a>
+        p
+          button#showresults Show Results
+      #myModal.modal.fade(role='dialog')
+        .modal-dialog
+            .modal-content
+                .modal-header(style='background-color:rgb(174, 253, 140)')
+                    button.close(type='button' data-dismiss='modal') ×
+                    h4.modal-title Console.log(play)
+                .modal-body(style='background-color:#ffffe6;color:#000')
+                    p#alert-text(style='color:#000')
 block scripts
-  script(src="/javascripts/login.js")   
+  script(src="/javascripts/login.js")  
+  script(src="/javascripts/ajaxResults.js")  

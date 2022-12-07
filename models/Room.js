@@ -1,8 +1,17 @@
-const User = require('./Player')
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
 
+var roomsSchema = new Schema({
+  _id: Number,
+  Number: Number, 
+  Name: String,
+  Player1: String,
+  Player2: String
+})
+var aa = mongoose.model('Salas', roomsSchema)
 module.exports = class Room {
   constructor(_id,number, name, player1, player2) {
-    this._id = _id;
+
     this.number = number;
     this.name = name;
     this.player1 = player1;
@@ -51,5 +60,5 @@ module.exports = class Room {
     return numberPlayers;
   }
 }
-
+module.exports = aa;
 

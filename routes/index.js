@@ -7,7 +7,7 @@ var {register, validatedRegister} = require("../controllers/registerController")
 var { gameApp, ocupation, ocupationcheck, disconnect } = require("../controllers/gameAppController");
 var apiGamesController = require ('../controllers/apiGamesController')
 var apiPlayersController = require ('../controllers/apiPlayersController')
-
+var apiRoomsController = require ('../controllers/apiRoomsController')
 /* GET home page. */
 router.get('/', init);
 router.get('/game', renderGame);
@@ -60,5 +60,23 @@ router.get('/ocupation', ocupation)
   })
   router.delete('/api/player/:id', function(req, res) {
     apiPlayersController.remove(req, res)
+  })
+ router.get('/api/room/search', function(req, res) {
+    apiRoomsController.search(req, res)
+  })
+  router.get('/api/room/', function(req, res) {
+    apiRoomsController.list(req, res)
+  })
+  router.get('/api/room/:id', function(req, res) {
+    apiRoomsController.show(req, res)
+  })
+  router.post('/api/room/', function(req, res) {
+    apiRoomsController.create(req, res)
+  })
+  router.put('/api/room/:id', function(req, res) {
+    apiRoomsController.update(req, res)
+  })
+  router.delete('/api/room/:id', function(req, res) {
+    apiRoomsController.remove(req, res)
   })
 module.exports = router;

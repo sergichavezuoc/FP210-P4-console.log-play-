@@ -67,12 +67,12 @@ update: function(req, res) {
         message: 'No hemos encontrado la game'
       })
     }
-    game.Number = req.body.number
-    game.Room =  req.body.room
-    game.Result = req.body.result
-    game.Winner = req.body.winner
-    game.Player1 = req.body.player1
-    game.Player2 = req.body.player2
+    game.number = req.body.number
+    game.room =  req.body.room
+    game.result = req.body.result
+    game.winner = req.body.winner
+    game.player1 = req.body.player1
+    game.player2 = req.body.player2
     game.save(function(err, game){
       if(err) {
         return res.status(500).json({

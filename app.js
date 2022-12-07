@@ -14,7 +14,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 // Incluyo MongoDB
-const {initDB, createCollection, createCollectionJugadores, insertSala, insertJugador, getSala, getJugador, getJugadores, actualizarSala, createCollectionGame, createConnection} = require("./js/db");
+const {initDB, createCollection, createCollectionJugadores, insertSala, insertJugador, getSalas, getJugador, getJugadores, actualizarSala, createCollectionGame, createConnection} = require("./js/db");
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -27,11 +27,9 @@ app.use('/favicons', express.static(__dirname + '/node_modules/express-favicon/i
 // Mongodb
 createConnection();
 createCollection();
-insertSala(rooms[0]);
-insertSala(rooms[1]);
-insertSala(rooms[2]);
 createCollectionGame();
 createCollectionJugadores();
+getSalas(rooms);
 app.use(indexRouter);
 
 
