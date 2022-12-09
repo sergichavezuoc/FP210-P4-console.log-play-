@@ -16,14 +16,66 @@
         "tags": [
           "Games"
         ],
-        "description": "",
+        "summary": "Get Game Results. ",
+        "description": "Endpoint to get all Games results. ",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Game list with results.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "638dd84bf95b105648ae0b2d"
+                },
+                "number": {
+                  "type": "string",
+                  "example": "5c7230e8-f784-40bd-89ad-870a7f7f7ac5"
+                },
+                "room": {
+                  "type": "string",
+                  "example": "room1"
+                },
+                "result": {
+                  "type": "number",
+                  "example": 25
+                },
+                "winner": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "player1": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "player2": {
+                  "type": "string",
+                  "example": "i@i.es"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error listing Games.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error listing games"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
@@ -33,7 +85,8 @@
         "tags": [
           "Games"
         ],
-        "description": "",
+        "summary": "Get Games with filters. ",
+        "description": "Endpoint to get Games filtered by query search. ",
         "parameters": [
           {
             "name": "q",
@@ -43,10 +96,61 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Game list with results.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "638dd84bf95b105648ae0b2d"
+                },
+                "number": {
+                  "type": "string",
+                  "example": "5c7230e8-f784-40bd-89ad-870a7f7f7ac5"
+                },
+                "room": {
+                  "type": "string",
+                  "example": "room1"
+                },
+                "result": {
+                  "type": "number",
+                  "example": 25
+                },
+                "winner": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "player1": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "player2": {
+                  "type": "string",
+                  "example": "i@i.es"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error listing Games.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error listing games"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
@@ -56,14 +160,66 @@
         "tags": [
           "Games"
         ],
-        "description": "",
+        "summary": "Get Game Results. ",
+        "description": "Endpoint to get all Games results. ",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Game list with results.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "638dd84bf95b105648ae0b2d"
+                },
+                "number": {
+                  "type": "string",
+                  "example": "5c7230e8-f784-40bd-89ad-870a7f7f7ac5"
+                },
+                "room": {
+                  "type": "string",
+                  "example": "room1"
+                },
+                "result": {
+                  "type": "number",
+                  "example": 25
+                },
+                "winner": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "player1": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "player2": {
+                  "type": "string",
+                  "example": "i@i.es"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error listing Games.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error listing games"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
@@ -71,12 +227,13 @@
         "tags": [
           "Games"
         ],
-        "description": "",
+        "summary": "Create Game. ",
+        "description": "Endpoint to create new Games. Requires a Game send in JSON as the one in the example",
         "parameters": [
           {
             "name": "obj",
             "in": "body",
-            "description": "Adding new Game.",
+            "description": "Game Object",
             "schema": {
               "type": "object",
               "properties": {
@@ -114,10 +271,50 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Game successfully created.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "saved"
+                },
+                "_id": {
+                  "type": "string",
+                  "example": "game_id"
+                }
+              },
+              "required": [
+                "message",
+                "_id"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error creating Game.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error saving game"
+                },
+                "err": {
+                  "type": "string",
+                  "example": "error received"
+                }
+              },
+              "required": [
+                "message",
+                "err"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
@@ -127,7 +324,8 @@
         "tags": [
           "Games"
         ],
-        "description": "",
+        "summary": "Get ONE Game. ",
+        "description": "Endpoint to get one Game filtering by Game Id. ",
         "parameters": [
           {
             "name": "id",
@@ -138,13 +336,79 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Game by Id.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "638dd84bf95b105648ae0b2d"
+                },
+                "number": {
+                  "type": "string",
+                  "example": "5c7230e8-f784-40bd-89ad-870a7f7f7ac5"
+                },
+                "room": {
+                  "type": "string",
+                  "example": "room1"
+                },
+                "result": {
+                  "type": "number",
+                  "example": 25
+                },
+                "winner": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "player1": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "player2": {
+                  "type": "string",
+                  "example": "i@i.es"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Game not found.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error Game not found"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error retrieving Game.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error retrieving game"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
@@ -152,37 +416,50 @@
         "tags": [
           "Games"
         ],
-        "description": "",
+        "summary": "Modify Game. ",
+        "description": "Endpoint to modify Games. Requires Game identifier in URL request. Requires a Game send in JSON as the one in the example. ",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Game identifier",
+            "schema": {
+              "type": "string",
+              "example": "312343434"
+            }
           },
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
+            "description": "Game Object",
             "schema": {
               "type": "object",
               "properties": {
                 "number": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 9
                 },
                 "room": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "room1"
                 },
                 "result": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 13
                 },
                 "winner": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "s@s.es"
                 },
                 "player1": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "r@r.es"
                 },
                 "player2": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "s@s.es"
                 }
               }
             }
@@ -190,13 +467,89 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Game successfully modified.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "2345234535"
+                },
+                "number": {
+                  "type": "number",
+                  "example": 9
+                },
+                "room": {
+                  "type": "string",
+                  "example": "room1"
+                },
+                "result": {
+                  "type": "number",
+                  "example": 13
+                },
+                "winner": {
+                  "type": "string",
+                  "example": "s@s.es"
+                },
+                "player1": {
+                  "type": "string",
+                  "example": "r@r.es"
+                },
+                "player2": {
+                  "type": "string",
+                  "example": "s@s.es"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
-            "description": "Not Found"
+            "description": "The Game to modify was not found.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error game not found"
+                },
+                "err": {
+                  "type": "string",
+                  "example": "error received"
+                }
+              },
+              "required": [
+                "message",
+                "err"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error creating Game.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error saving game"
+                },
+                "err": {
+                  "type": "string",
+                  "example": "error received"
+                }
+              },
+              "required": [
+                "message",
+                "err"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
@@ -204,7 +557,8 @@
         "tags": [
           "Games"
         ],
-        "description": "",
+        "summary": "Delete Game. ",
+        "description": "Endpoint to delete a Game by Id. ",
         "parameters": [
           {
             "name": "id",
@@ -215,14 +569,54 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Game successfully deleted.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "2345234535"
+                },
+                "number": {
+                  "type": "number",
+                  "example": 9
+                },
+                "room": {
+                  "type": "string",
+                  "example": "room1"
+                },
+                "result": {
+                  "type": "number",
+                  "example": 13
+                },
+                "winner": {
+                  "type": "string",
+                  "example": "s@s.es"
+                },
+                "player1": {
+                  "type": "string",
+                  "example": "r@r.es"
+                },
+                "player2": {
+                  "type": "string",
+                  "example": "s@s.es"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
     },
     "/api/player/search": {
       "get": {
-        "description": "",
+        "tags": [
+          "Players"
+        ],
+        "summary": "Get Players with filters. ",
+        "description": "Endpoint to get Players filtered by query search. ",
         "parameters": [
           {
             "name": "q",
@@ -232,43 +626,203 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Players list.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Juan"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345"
+                }
+              },
+              "required": [
+                "name",
+                "username",
+                "password"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error listing Players.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error listing players"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
     },
     "/api/player/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Players"
+        ],
+        "summary": "Get Players. ",
+        "description": "Endpoint to get all Players. ",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Players list.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Juan"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345"
+                }
+              },
+              "required": [
+                "name",
+                "username",
+                "password"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error listing Players.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error listing players"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
       "post": {
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Players"
+        ],
+        "summary": "Create Player. ",
+        "description": "Endpoint to create new Players. Requires a Player send in JSON as the one in the example",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Player Object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Juan"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345"
+                }
+              },
+              "required": [
+                "name",
+                "username",
+                "password"
+              ]
+            }
+          }
+        ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Player successfully created.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "saved"
+                },
+                "_id": {
+                  "type": "string",
+                  "example": "game_id"
+                }
+              },
+              "required": [
+                "message",
+                "_id"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error creating Player.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error saving player"
+                },
+                "err": {
+                  "type": "string",
+                  "example": "error received"
+                }
+              },
+              "required": [
+                "message",
+                "err"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
     },
     "/api/player/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Players"
+        ],
+        "summary": "Get ONE Player. ",
+        "description": "Endpoint to get one Game filtering by username. ",
         "parameters": [
           {
             "name": "id",
@@ -279,18 +833,77 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Player by Id.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Juan"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345"
+                }
+              },
+              "required": [
+                "name",
+                "username",
+                "password"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Player not found.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error Player not found"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error retrieving Player.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error retrieving player"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Players"
+        ],
+        "summary": "Modify Player. ",
+        "description": "Endpoint to modifiy Player filtering by Player Id. ",
         "parameters": [
           {
             "name": "id",
@@ -319,18 +932,77 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Player Modified.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Juan"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345"
+                }
+              },
+              "required": [
+                "name",
+                "username",
+                "password"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Error updating Player.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Player not found"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error updating Player.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error updating player"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Players"
+        ],
+        "summary": "Delete Player. ",
+        "description": "Endpoint to DELETE one Player filtering by Player Id. ",
         "parameters": [
           {
             "name": "id",
@@ -341,20 +1013,79 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Player deleted.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Juan"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345"
+                }
+              },
+              "required": [
+                "name",
+                "username",
+                "password"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Error deleting Player.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Player not found"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error deleting Player.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error deleting player"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
     },
     "/api/room/search": {
       "get": {
-        "description": "",
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Get Rooms with filters. ",
+        "description": "Endpoint to get Rooms filtered by query search. ",
         "parameters": [
           {
             "name": "q",
@@ -364,43 +1095,227 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Rooms list.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "number",
+                  "example": 12
+                },
+                "number": {
+                  "type": "string",
+                  "example": "room12"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Room 12"
+                },
+                "player1": {
+                  "type": "string",
+                  "example": ""
+                },
+                "player2": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "required": [
+                "_id",
+                "number",
+                "name"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error listing Rooms.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error listing rooms"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
     },
     "/api/room/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Get Rooms. ",
+        "description": "Endpoint to get all Rooms. ",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Rooms list.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "number",
+                  "example": 12
+                },
+                "number": {
+                  "type": "string",
+                  "example": "room12"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Room 12"
+                },
+                "player1": {
+                  "type": "string",
+                  "example": ""
+                },
+                "player2": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "required": [
+                "_id",
+                "number",
+                "name"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error listing Rooms.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error listing rooms"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
       "post": {
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Create Room. ",
+        "description": "Endpoint to create new Rooms. Requires a Room object send in JSON as the one in the example",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Room Object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "number",
+                  "example": 12
+                },
+                "number": {
+                  "type": "string",
+                  "example": "room12"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Room 12"
+                },
+                "player1": {
+                  "type": "string",
+                  "example": ""
+                },
+                "player2": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "required": [
+                "_id",
+                "number",
+                "name"
+              ]
+            }
+          }
+        ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Room successfully created.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "saved"
+                },
+                "_id": {
+                  "type": "string",
+                  "example": "game_id"
+                }
+              },
+              "required": [
+                "message",
+                "_id"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error creating Room.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error saving room"
+                },
+                "err": {
+                  "type": "string",
+                  "example": "error received"
+                }
+              },
+              "required": [
+                "message",
+                "err"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
     },
     "/api/room/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Get ONE Room. ",
+        "description": "Endpoint to get one Room filtering by Room Id. ",
         "parameters": [
           {
             "name": "id",
@@ -411,18 +1326,85 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Room by Id.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "number",
+                  "example": 12
+                },
+                "number": {
+                  "type": "string",
+                  "example": "room12"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Room 12"
+                },
+                "player1": {
+                  "type": "string",
+                  "example": ""
+                },
+                "player2": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "required": [
+                "_id",
+                "number",
+                "name"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Room not found.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error Room not found"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error retrieving Room.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error retrieving room"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Modify Room. ",
+        "description": "Endpoint to modifiy Room filtering by Room Id. ",
         "parameters": [
           {
             "name": "id",
@@ -436,7 +1418,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "number": {
+                "_id": {
                   "example": "any"
                 },
                 "room": {
@@ -460,18 +1442,85 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Room Modified.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "number",
+                  "example": 12
+                },
+                "number": {
+                  "type": "string",
+                  "example": "room12"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Room 12"
+                },
+                "player1": {
+                  "type": "string",
+                  "example": ""
+                },
+                "player2": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "required": [
+                "_id",
+                "number",
+                "name"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Error updating Room.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Room not found"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error updating Room.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error updating player"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Delete Room. ",
+        "description": "Endpoint to DELETE Room filtering by Room Id. ",
         "parameters": [
           {
             "name": "id",
@@ -482,7 +1531,196 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Room deleted.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "number",
+                  "example": 12
+                },
+                "number": {
+                  "type": "string",
+                  "example": "room12"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Room 12"
+                },
+                "player1": {
+                  "type": "string",
+                  "example": ""
+                },
+                "player2": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "required": [
+                "_id",
+                "number",
+                "name"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ocupationroom/{room}": {
+      "get": {
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Get Room ocupation. ",
+        "description": "Endpoint to get number of Players in a Room. The response is HTML",
+        "parameters": [
+          {
+            "name": "room",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Room ocupation",
+            "body": "<i id=\"oroom2\" style=\"\" class=\"fa fa-user-times fa-2x\"></i>"
+          },
+          "404": {
+            "description": "Room not found.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error Room not found"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error retrieving Room.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error retrieving room"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/room/{room}/player/{player}": {
+      "put": {
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Modify Room to pu Player in Room. ",
+        "description": "Endpoint to add Player to a Room. ",
+        "parameters": [
+          {
+            "name": "room",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "player",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Room Modified.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "number",
+                  "example": 12
+                },
+                "number": {
+                  "type": "string",
+                  "example": "room12"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Room 12"
+                },
+                "player1": {
+                  "type": "string",
+                  "example": ""
+                },
+                "player2": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "required": [
+                "_id",
+                "number",
+                "name"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Error updating Room.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Room not found"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error updating Room.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error updating player"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }

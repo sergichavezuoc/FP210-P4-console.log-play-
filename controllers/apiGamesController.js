@@ -6,7 +6,7 @@ search: function (req, res) {
   Games.find({ $text: { $search: q } }, function(err, games) {
     if(err) {
       return res.status(500).json({
-        message: 'Error en la búsqueda'
+        message: 'Error in search'
       })
     }
     return res.json(games)
@@ -16,7 +16,7 @@ list: function(req, res) {
   Games.find(function(err, games){
     if(err) {
       return res.status(500).json({
-        message: 'Error obteniendo la game'
+        message: 'Error listing Games'
       })
     }
     return res.json(games)
@@ -27,12 +27,12 @@ show: function(req, res) {
   Games.findOne({_id: id}, function(err, game){
     if(err) {
       return res.status(500).json({
-        message: 'Se ha producido un error al obtener la game'
+        message: 'Error retrieving Game'
       })
     }
     if(!game) {
       return res.status(404).json( {
-        message: 'No tenemos esta game'
+        message: 'Game not Found'
       })
     }
     return res.json(game)
@@ -43,14 +43,13 @@ create: function(req, res) {
   game.save(function(err, game){
     if(err) {
       return res.status(500).json( {
-        message: 'Error al guardar la game',
+        message: 'Error saving game',
         error: err
       })
     }
     return res.status(201).json({
       message: 'saved',
       _id: game._id,
-      game: game
     })
   })
 },
@@ -94,7 +93,7 @@ remove: function(req, res) {
   Games.findByIdAndRemove(id, function(err, game){
     if(err) {
       return res.json(500, {
-        message: 'No hemos encontrado la game'
+        message: 'Game not found'
       })
     }
     return res.json(game)
