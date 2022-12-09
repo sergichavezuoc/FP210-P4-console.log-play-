@@ -6,7 +6,7 @@ search: function (req, res) {
   Rooms.find({ $text: { $search: q } }, function(err, rooms) {
     if(err) {
       return res.status(500).json({
-        message: 'Error en la búsqueda'
+        message: 'Error in search'
       })
     }
     return res.json(rooms)
@@ -16,7 +16,7 @@ list: function(req, res) {
   Rooms.find(function(err, rooms){
     if(err) {
       return res.status(500).json({
-        message: 'Error obteniendo la room'
+        message: 'Error getting room'
       })
     }
     return res.json(rooms)
@@ -27,12 +27,12 @@ show: function(req, res) {
   Rooms.findOne({_id: id}, function(err, room){
     if(err) {
       return res.status(500).json({
-        message: 'Se ha producido un error al obtener la room'
+        message: 'Error getting room'
       })
     }
     if(!room) {
       return res.status(404).json( {
-        message: 'No tenemos esta room'
+        message: 'Room not found'
       })
     }
     return res.json(room)
@@ -43,7 +43,7 @@ create: function(req, res) {
   room.save(function(err, room){
     if(err) {
       return res.status(500).json( {
-        message: 'Error al guardar la room',
+        message: 'Error saving room',
         error: err
       })
     }
@@ -58,13 +58,13 @@ ocupationroom: function(req, res) {
   Rooms.findOne({number: room2}, function(err, room){
     if(err) {
       return res.status(500).json({
-        message: 'Se ha producido un error al guardar jugador in room',
+        message: 'Error saving room',
         error: err
       })
     }
     if(!room) {
       return res.status(404).json({
-        message: 'No hemos encontrado la room'
+        message: 'Room not found'
       })
     }
     console.log(room)
@@ -88,13 +88,13 @@ console.log(player);
   Rooms.findOne({number: room2}, function(err, room){
     if(err) {
       return res.status(500).json({
-        message: 'Se ha producido un error al guardar jugador in room',
+        message: 'Error saving player in room',
         error: err
       })
     }
     if(!room) {
       return res.status(404).json({
-        message: 'No hemos encontrado la room'
+        message: 'Room not found'
       })
     }
     if (room.player1!="" && room.player2!="") {
@@ -115,12 +115,12 @@ console.log(player);
       console.log(err)
       if(err) {
         return res.status(500).json({
-          message: 'Error al guardar la room'
+          message: 'Error saving room'
         })
       }
       if(!room) {
         return res.status(404).json({
-          message: 'No hemos encontrado la room'
+          message: 'Room not found'
         })
       }
       return res.json(room)
@@ -132,13 +132,13 @@ update: function(req, res) {
   Rooms.findOne({_id: id}, function(err, room){
     if(err) {
       return res.status(500).json({
-        message: 'Se ha producido un error al guardar la room',
+        message: 'Error saving room',
         error: err
       })
     }
     if(!room) {
       return res.status(404).json({
-        message: 'No hemos encontrado la room'
+        message: 'Room not found'
       })
     }
     room._id = req.body._id
@@ -150,12 +150,12 @@ update: function(req, res) {
     room.save(function(err, room){
       if(err) {
         return res.status(500).json({
-          message: 'Error al guardar la room'
+          message: 'Error saving room'
         })
       }
       if(!room) {
         return res.status(404).json({
-          message: 'No hemos encontrado la room'
+          message: 'Room not found'
         })
       }
       return res.json(room)
@@ -167,7 +167,7 @@ remove: function(req, res) {
   Rooms.findByIdAndRemove(id, function(err, room){
     if(err) {
       return res.json(500, {
-        message: 'No hemos encontrado la room'
+        message: 'Room not found'
       })
     }
     return res.json(room)

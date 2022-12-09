@@ -58,13 +58,13 @@ update: function(req, res) {
   Games.findOne({_id: id}, function(err, game){
     if(err) {
       return res.status(500).json({
-        message: 'Se ha producido un error al guardar la game',
+        message: 'Error saving Game',
         error: err
       })
     }
     if(!game) {
       return res.status(404).json({
-        message: 'No hemos encontrado la game'
+        message: 'Game not found'
       })
     }
     game.number = req.body.number
@@ -76,12 +76,12 @@ update: function(req, res) {
     game.save(function(err, game){
       if(err) {
         return res.status(500).json({
-          message: 'Error al guardar la game'
+          message: 'Error saving game'
         })
       }
       if(!game) {
         return res.status(404).json({
-          message: 'No hemos encontrado la game'
+          message: 'Game not found'
         })
       }
       return res.json(game)

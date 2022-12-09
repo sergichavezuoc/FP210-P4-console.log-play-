@@ -6,7 +6,7 @@ search: function (req, res) {
   Players.find({ $text: { $search: q } }, function(err, players) {
     if(err) {
       return res.status(500).json({
-        message: 'Error en la búsqueda'
+        message: 'Error in search'
       })
     }
     return res.json(players)
@@ -16,7 +16,7 @@ list: function(req, res) {
   Players.find(function(err, players){
     if(err) {
       return res.status(500).json({
-        message: 'Error obteniendo la player'
+        message: 'Error getting player'
       })
     }
     return res.json(players)
@@ -27,12 +27,12 @@ show: function(req, res) {
   Players.findOne({username: id}, function(err, player){
     if(err) {
       return res.status(500).json({
-        message: 'Se ha producido un error al obtener la player'
+        message: 'Error getting player'
       })
     }
     if(!player) {
       return res.status(404).json( {
-        message: 'No tenemos esta player'
+        message: 'Player not found'
       })
     }
     return res.json(player)
@@ -43,7 +43,7 @@ create: function(req, res) {
   player.save(function(err, player){
     if(err) {
       return res.status(500).json( {
-        message: 'Error al guardar la player',
+        message: 'Error saving player',
         error: err
       })
     }
@@ -58,13 +58,13 @@ update: function(req, res) {
   Players.findOne({username: id}, function(err, player){
     if(err) {
       return res.status(500).json({
-        message: 'Se ha producido un error al guardar la player',
+        message: 'Error saving player',
         error: err
       })
     }
     if(!player) {
       return res.status(404).json({
-        message: 'No hemos encontrado la player'
+        message: 'Player not found'
       })
     }
     player.name = req.body.name
@@ -73,12 +73,12 @@ update: function(req, res) {
     player.save(function(err, player){
       if(err) {
         return res.status(500).json({
-          message: 'Error al guardar la player'
+          message: 'Error saving player'
         })
       }
       if(!player) {
         return res.status(404).json({
-          message: 'No hemos encontrado la player'
+          message: 'Player not found'
         })
       }
       return res.json(player)
@@ -90,19 +90,19 @@ remove: function(req, res) {
   Players.findOne({username: id}, function(err, player){
     if(err) {
       return res.status(500).json({
-        message: 'Se ha producido un error al guardar la player',
+        message: 'Error saving player',
         error: err
       })
     }
     if(!player) {
       return res.status(404).json({
-        message: 'No hemos encontrado la player'
+        message: 'Player not found'
       })
     }
     Players.findByIdAndRemove(player.id, function(err, player){
       if(err) {
         return res.json(500, {
-          message: 'No hemos encontrado la player'
+          message: 'Player nof found'
         })
       }
       const jugadores = require('../models/UserRegisters').users;

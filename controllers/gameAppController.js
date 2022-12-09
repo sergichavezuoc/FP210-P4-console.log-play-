@@ -14,12 +14,12 @@ function disconnect(request, response) {
         console.log(err)
         if(err) {
           return res.status(500).json({
-            message: 'Error al guardar la room'
+            message: 'Error saving room'
           })
         }
         if(!room) {
           return res.status(404).json({
-            message: 'No hemos encontrado la room'
+            message: 'Room not found'
           })
         }
         
@@ -32,12 +32,12 @@ function disconnect(request, response) {
         console.log(err)
         if(err) {
           return res.status(500).json({
-            message: 'Error al guardar la room'
+            message: 'Error saving room'
           })
         }
         if(!room) {
           return res.status(404).json({
-            message: 'No hemos encontrado la room'
+            message: 'Room not found'
           })
         }
         
