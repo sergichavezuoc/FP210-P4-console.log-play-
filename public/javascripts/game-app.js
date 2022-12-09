@@ -111,7 +111,6 @@ request.fail(function() {
 */
 function drop(ev) {
     var data2 = ev.dataTransfer.getData("text");
-    window.alert(data2)
     if (ev.target.id != "user-name") {
         
         
@@ -127,7 +126,6 @@ function drop(ev) {
                     user[onRoom] = true;
                     localStorage.setItem('User', JSON.stringify(user));
                     ev.preventDefault();
-                    window.alert(data2);
                     var nodeCopy = document.getElementById(data2).cloneNode(true);
                     nodeCopy.id = "newId"
                     ev.target.appendChild(nodeCopy);
