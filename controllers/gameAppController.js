@@ -1,4 +1,4 @@
-const { rooms } = require('../models/RoomData')
+var Rooms = require('../models/Room')
 
 function gameApp(request, response) {
   response.render('game-app', { name: 'game-app.css' });
@@ -6,14 +6,42 @@ function gameApp(request, response) {
 }
 
 function disconnect(request, response) {
-  var chosen_room = rooms.find(room => room.number === request.query.room);
+  Rooms.findOne({number: request.query.room}, function(err, chosen_room){
   if (chosen_room !== undefined) {
     if (chosen_room.player1 === request.query.user) {
       chosen_room.player1 = '';
+      chosen_room.save(function(err, room){
+        console.log(err)
+        if(err) {
+          return res.status(500).json({
+            message: 'Error al guardar la room'
+          })
+        }
+        if(!room) {
+          return res.status(404).json({
+            message: 'No hemos encontrado la room'
+          })
+        }
+        
+      })     
       response.writeHead(200, { "Content-Type": "text/html" });
     }
     else if (chosen_room.player2 === request.query.user) {
       chosen_room.player2 = '';
+      chosen_room.save(function(err, room){
+        console.log(err)
+        if(err) {
+          return res.status(500).json({
+            message: 'Error al guardar la room'
+          })
+        }
+        if(!room) {
+          return res.status(404).json({
+            message: 'No hemos encontrado la room'
+          })
+        }
+        
+      }) 
       response.writeHead(200, { "Content-Type": "text/html" });
     }
     else {
@@ -24,27 +52,28 @@ function disconnect(request, response) {
     response.writeHead(404, { "Content-Type": "text/html" });
   }
   response.end();
+  });
 }
 
 function ocupationcheck(request, response) {
-
+  Rooms.findOne({room: request.query.room}, function(err, room){
   var chosen_room = rooms.find(room => room.number === request.query.room);
   if (chosen_room != undefined) {
     if (chosen_room.player1 != '' && chosen_room.player2 != '') {
-      response.writeHead(401, { "Content-Type": "text/html" });
+      return response.send('<i id="o'+request.query.room+'" style="" class="fa fa-users fa-2x"></i>');
     }
     else if (chosen_room.player1 == '' && chosen_room.player2 == '') {
-      response.writeHead(200, { "Content-Type": "text/html" });
+      return response.send('<i id="o'+request.query.room+'" style="" class="fa fa-user-times fa-2x"></i>');
     }
     else {
-      response.writeHead(201, { "Content-Type": "text/html" });
+      return response.send('<i id="o'+request.query.room+'" style="" class="fa fa-user fa-2x"></i>');
     }
   } else {
     response.writeHead(404, { "Content-Type": "text/html" });
   }
 
   response.end();
-
+  })
 }
 function ocupation(request, response) {
   var chosen_room = rooms.find(room => room.number === request.query.room);

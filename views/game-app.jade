@@ -1,6 +1,10 @@
 extends layout
 
 block content
+    script(src="/javascripts/prototype.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js")
+    script.
+        $j = jQuery.noConflict();
     #wrapper-main 
         .wrapper-header
             .wrapper-log-out
@@ -56,19 +60,19 @@ block content
                 #containerRooms.container-rooms
                     .wrapper-container 
                         .wrapper-ocupation 
-                            i#oroom1 
+                            span#oroom1 
                         #room1.room(ondrop='drop(event)' ondragover='allowDrop(event)')
                         .wrapper-foot
                             i#room1f
                     .wrapper-container
                         .wrapper-ocupation
-                            i#oroom2(style='')
+                            span#oroom2(style='')
                         #room2.room(ondrop='drop(event)' ondragover='allowDrop(event)')
                         .wrapper-foot
                             i#room2f
                     .wrapper-container
                         .wrapper-ocupation
-                            i#oroom3(style='')
+                            span#oroom3(style='')
                         #room3.room(ondrop='drop(event)' ondragover='allowDrop(event)')
                         .wrapper-foot
                             i#room3f 
@@ -105,7 +109,6 @@ block content
                     p#alert-text
     
 block scripts
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js") 
     script(src="/javascripts/game-app.js")
     script(src="/javascripts/ajaxResults.js")
     

@@ -1,8 +1,8 @@
 function showResults() {
-    $("#alert-text").html("");
-$(document).ready(() => {
+    $j("#alert-text").html("");
+$j(document).ready(() => {
     console.log('Button clicked! Running ajax...');
-    $.ajax({
+    $j.ajax({
         url: '/getResultsAjax',
         type: 'GET',
         contentType: 'application/json',
@@ -19,6 +19,7 @@ $(document).ready(() => {
 
             for (let key in data) {
               // (C2) ROWS & CELLS
+              if(typeof data[key].room != "undefined"){
               row = table.insertRow();
               cellA = row.insertCell();
               cellB = row.insertCell();
@@ -30,10 +31,11 @@ $(document).ready(() => {
               cellA.innerHTML = data[key].room;
               cellB.innerHTML = data[key].result+'/25';
               cellC.innerHTML = data[key].winner;
+            }
         }
         console.log(table);
-        $("#alert-text").append(table);
-        $("#myModal").modal("show");
+        $j("#alert-text").append(table);
+        $j("#myModal").modal("show");
     }
     
 });

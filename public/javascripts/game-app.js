@@ -1,16 +1,20 @@
 
 
-var mymodal = $('myModal');
+var mymodal = $j('myModal');
 //MODAL POPUP
-$('#myModal').on('click', 'button.close', function (eventObject) {
-    $('#myModal').modal('hide');
+$j('#myModal').on('click', 'button.close', function (eventObject) {
+    $j('#myModal').modal('hide');
 });
-$('#myModalform').on('click', 'button.close', function (eventObject) {
-    $('#myModalform').modal('hide');
+$j('#myModalform').on('click', 'button.close', function (eventObject) {
+    $j('#myModalform').modal('hide');
 });
 
 //DATA LOCALSTORAGE
 var user = JSON.parse(localStorage.getItem('User'));
+user.room1=false;
+user.room2=false;
+user.room3=false;
+localStorage.setItem('User', JSON.stringify(user));
 var name = user.name;
 var avatar = document.getElementById("avatarChoose");
 var userName = document.getElementById("user-name");
@@ -58,21 +62,21 @@ function entrar(id) {
 var boton = document.querySelector("#profileshow");
 
 boton.addEventListener('click', function () {
-    $("#myModalform").modal("show");
+    $j("#myModalform").modal("show");
 })
 function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
     const value = Object.fromEntries(data.entries());
     console.log(JSON.stringify(value, null, '  '));
-    var request = $.ajax({
+    var request = $j.ajax({
         url: '/api/player/'+user.username,
         type: 'PUT',
         contentType: 'application/json',
         data: JSON.stringify(value, null, '  '),
         success: (data) => {
             console.log(data);
-                $("#myModalformcontent").html("Profile Updated!");
+                $j("#myModalformcontent").html("Profile Updated!");
  
         }   
 });
@@ -85,7 +89,7 @@ request.fail(function() {
 
   function deleteProfile() {
     if (window.confirm("Do you really want to delete your profile?")){
-    $.ajax({
+    $j.ajax({
         url: '/api/player/'+user.username,
         type: 'DELETE',
         success: (data) => {
@@ -106,13 +110,42 @@ request.fail(function() {
 * @param  {Event} ev event that trigger the function
 */
 function drop(ev) {
-    var data = ev.dataTransfer.getData("text");
+    var data2 = ev.dataTransfer.getData("text");
+    window.alert(data2)
     if (ev.target.id != "user-name") {
         
-        fetch('/ocupation?room=' + ev.target.id + '&user=' + user.username).then(response => {
+        
+            var request = $j.ajax({
+                url: '/api/room/'+ev.target.id+'/player/'+user.username,
+                type: 'PUT',
+                contentType: 'application/json',
+                success: (data) => {
+                    console.log(data);
+                    document.getElementById("alert-text").innerHTML = 'Welcome to the room';
+                    $j("#myModal").modal("show");
+                    var onRoom = ev.target.id;
+                    user[onRoom] = true;
+                    localStorage.setItem('User', JSON.stringify(user));
+                    ev.preventDefault();
+                    window.alert(data2);
+                    var nodeCopy = document.getElementById(data2).cloneNode(true);
+                    nodeCopy.id = "newId"
+                    ev.target.appendChild(nodeCopy);
+                    roomSelected(ev.target.id);
+                    console.log(ev.target.id)
+                    document.getElementById(ev.target.id).innerHTML = document.getElementById(ev.target.id).innerHTML + '<input class="btn btn-primary" type="button" value="Get out" onClick=getOutRoom("' + ev.target.id + '","' + user.username + '") />';
+                    document.getElementById(ev.target.id + "f").innerHTML = '<a href="javascript:entrar(\'' + ev.target.id + '\')">Entrar</a>';
+                    document.getElementById("avatarChoose").setAttribute('draggable', false);            
+                }   
+        });
+        request.fail(function() {
+            alert( "Seleccion of room failed");
+          });
+          /** 
+           * fetch('/ocupation?room=' + ev.target.id + '&user=' + user.username).then(response => {
             if (response.ok) {
                 document.getElementById("alert-text").innerHTML = 'Welcome to the room';
-                $("#myModal").modal("show");
+                $j("#myModal").modal("show");
                 var onRoom = ev.target.id;
                 user[onRoom] = true;
                 localStorage.setItem('User', JSON.stringify(user));
@@ -126,18 +159,19 @@ function drop(ev) {
                 document.getElementById(ev.target.id + "f").innerHTML = '<a href="javascript:entrar(\'' + ev.target.id + '\')">Entrar</a>';
                 document.getElementById("avatarChoose").setAttribute('draggable', false);
             }
-            /**
-            * user is alrealdy in other room
-            */
+©
+
             else if (response.status == 201) {
                 document.getElementById("alert-text").innerHTML = 'You are in other room. Disconnect first';
-                $("#myModal").modal("show");
+                $j("#myModal").modal("show");
             }
             else {
                 document.getElementById("alert-text").innerHTML = 'Room is full. Try another one';
-                $("#myModal").modal("show");
+                $j("#myModal").modal("show");
             }
-        })
+                        * user is alrealdy in other room
+            */
+        
     }
     else {
         var nodeCopy = document.getElementById(data).cloneNode(true);
@@ -155,7 +189,7 @@ function getOutRoom(room, userName) {
     fetch('/disconnect?room=' + room + '&user=' + userName).then(response => {
         if (response.ok) {
             document.getElementById("alert-text").innerHTML = 'Correctly disconnected';
-            $("#myModal").modal("show");
+            $j("#myModal").modal("show");
             user[room] = false;
             localStorage.setItem('User', JSON.stringify(user));
             document.getElementById(room).innerHTML = '<i id="o' + room + '"></i>';
@@ -165,7 +199,7 @@ function getOutRoom(room, userName) {
         }
         else {
             document.getElementById("alert-text").innerHTML = 'Error leaving the room';
-            $("#myModal").modal("show");
+            $j("#myModal").modal("show");
         }
     })
 }
@@ -250,54 +284,30 @@ avatarPicker.addEventListener("click", function (event) {
     })
 })
 
-/**
-* Check if a room is full or not.
-* @param  {Number} room Number of the checked room.
-*/
-function checkOcupation(room) {
-    fetch('/ocupationcheck?room=' + room + '&user=' + user.username).then(response => {
-        //vacia
-        if (response.status == 200) {
-            document.getElementById('o' + room).classList.add("fa");
-            document.getElementById('o' + room).classList.add("fa-user-times");
-            document.getElementById('o' + room).classList.remove("fa-user");
-            document.getElementById('o' + room).classList.remove("fa-users");
-            document.getElementById('o' + room).classList.add("fa-2x");
-
-        }
-        //1persona
-        else if (response.status == 201) {
-            document.getElementById('o' + room).classList.add("fa");
-            document.getElementById('o' + room).classList.add("fa-user");
-            document.getElementById('o' + room).classList.remove("fa-user-times");
-            document.getElementById('o' + room).classList.remove("fa-users");
-            document.getElementById('o' + room).classList.add("fa-2x");
-        }
-        //los dos
-        else if (response.status == 401) {
-            document.getElementById('o' + room).classList.add("fa");
-            document.getElementById('o' + room).classList.add("fa-users");
-            document.getElementById('o' + room).classList.remove("fa-user");
-            document.getElementById('o' + room).classList.remove("fa-user-times");
-            document.getElementById('o' + room).classList.add("fa-2x");
-
-        }
-
-    })
-}
-
-
-setInterval(function () { checkOcupation("room1", user.username) }, 1000);
-setInterval(function () { checkOcupation("room2", user.username) }, 1000);
-setInterval(function () { checkOcupation("room3", user.username) }, 1000);
+new Ajax.PeriodicalUpdater('oroom1', '/api/ocupationroom/room1', {
+    method: 'get',
+    frequency: 1,
+    decay: 2
+  });
+new Ajax.PeriodicalUpdater('oroom2', '/api/ocupationroom/room2', {
+    method: 'get',
+    frequency: 1,
+    decay: 2
+  });
+new Ajax.PeriodicalUpdater('oroom3', '/api/ocupationroom/room3', {
+    method: 'get',
+    frequency: 1,
+    decay: 2
+  });
 
 
 
 
 
-$(document).ready(function () {
-    $("#containerRooms").hide().fadeIn(3000);
-    $("#wrapper-main").hide().fadeIn(1000);
+
+$j(document).ready(function () {
+    $j("#containerRooms").hide().fadeIn(3000);
+    $j("#wrapper-main").hide().fadeIn(1000);
 });
 
 /**
@@ -306,25 +316,25 @@ $(document).ready(function () {
 */
 function roomSelected(roomNumber) {
 
-    $("#room1").css("background-color", "rgb(58, 140, 255)")
-    $("#room2").css("background-color", "rgb(58, 140, 255)")
-    $("#room3").css("background-color", "rgb(58, 140, 255)")
+    $j("#room1").css("background-color", "rgb(58, 140, 255)")
+    $j("#room2").css("background-color", "rgb(58, 140, 255)")
+    $j("#room3").css("background-color", "rgb(58, 140, 255)")
 
     switch (roomNumber) {
 
         case "room1":
 
-            $("#room1").css("background-color", "red")
+            $j("#room1").css("background-color", "red")
 
             break;
         case "room2":
 
-            $("#room2").css("background-color", "red")
+            $j("#room2").css("background-color", "red")
 
             break;
         case "room3":
 
-            $("#room3").css("background-color", "red")
+            $j("#room3").css("background-color", "red")
 
             break;
         default:

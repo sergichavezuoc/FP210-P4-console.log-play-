@@ -5,6 +5,7 @@ var router = express.Router();
 var { rooms } = require('../models/RoomData');
 const {insertGame} = require("../js/db");
 const { Server } = require('ws');
+var Rooms = require('../models/Room')
 // Socket server
 const sockserver = new Server({ port: 443 });
 const clients = new Map();
@@ -32,10 +33,33 @@ sockserver.on('connection', (ws, req) => {
     }
     if(message.type === 'result'){
       console.log(ws)
-      ws.game.setResult(message.result);
-      ws.game.setWinner(message.winner)
+      ws.game.result=message.result;
+      ws.game.winner=message.winner
       insertGame(ws.game)
-
+      Rooms.findOne({number: ws.room}, function(err, roomToDelete){
+        
+        roomToDelete.player1="";
+        roomToDelete.player2="";
+        console.log(roomToDelete)
+        roomToDelete.save(function(err, roomToDelete){
+          console.log(err)
+          if(err) {
+            return res.status(500).json({
+              message: 'Error al guardar la room'
+            })
+          }
+          if(!roomToDelete) {
+            return res.status(404).json({
+              message: 'No hemos encontrado la room'
+            })
+          }
+          
+        }) 
+        players[ws.room] = 0;
+        colors[ws.room] = "";
+        clients.delete(ws);
+       
+      })
     }
 
   });
@@ -45,20 +69,35 @@ sockserver.on('connection', (ws, req) => {
       if (client.room === ws.room) {       
         // guardar en ws.game setresult y setganador
         const data = JSON.stringify({ type: 'close', message: 'Opponent left the game. You won!' });
-        if (ws.game.getResult()==="" && client.game.getResult()===""){
-          client.game.setResult("25");
-          client.game.setWinner(client.player)
+        if (ws.game.result==="" && client.game.result===""){
+          client.game.result="25";
+          client.game.winner=client.player;
           insertGame(client.game)
         }
         client.send(data);
       }
     })
-    const roomToDelete = rooms.find(room => room.number === ws.room);
-    roomToDelete.setPlayer2("");
-    roomToDelete.setPlayer1("");
+    Rooms.findOne({number: ws.room}, function(err, roomToDelete){
+    roomToDelete.player1="";
+    roomToDelete.player2="";
+    roomToDelete.save(function(err, room){
+      console.log(err)
+      if(err) {
+        return res.status(500).json({
+          message: 'Error al guardar la room'
+        })
+      }
+      if(!room) {
+        return res.status(404).json({
+          message: 'No hemos encontrado la room'
+        })
+      }
+      
+    }) 
     players[ws.room] = 0;
     colors[ws.room] = "";
     clients.delete(ws);
+    })
   });
 
 });
@@ -91,7 +130,7 @@ function joine(ws, req) {
 
     });
   } else if (players[room] === 0) {
-    let game = new Game(uuidv4(), room, "", "", parameters.username, "");
+    let game = new Game({number:uuidv4(), room:room, result:"", winner:"", player1: parameters.username, player2:""});
     games.push(game);
     const id = uuidv4();
     const color = Math.floor(Math.random() * 360);

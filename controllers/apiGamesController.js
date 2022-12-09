@@ -49,7 +49,8 @@ create: function(req, res) {
     }
     return res.status(201).json({
       message: 'saved',
-      _id: game._id
+      _id: game._id,
+      game: game
     })
   })
 },

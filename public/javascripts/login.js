@@ -5,7 +5,7 @@ boton.addEventListener('click', function () {
     var username = document.getElementById('email').value;
     var password = document.getElementById('password').value;
 
-    $.ajax({
+    $j.ajax({
         url: '/api/player/'+username,
         type: 'GET',
         contentType: 'application/json',
@@ -27,6 +27,6 @@ boton.addEventListener('click', function () {
 
 
 });
-$('#myModal').on('click', 'button.close', function (eventObject) {
-    $('#myModal').modal('hide');
+$j('#myModal').on('click', 'button.close', function (eventObject) {
+    $j('#myModal').modal('hide');
 });

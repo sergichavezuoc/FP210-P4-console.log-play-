@@ -3,10 +3,10 @@ var Schema = mongoose.Schema
 
 var roomsSchema = new Schema({
   _id: Number,
-  Number: Number, 
-  Name: String,
-  Player1: String,
-  Player2: String
+  number: String, 
+  name: String,
+  player1: String,
+  player2: String
 })
 var aa = mongoose.model('Salas', roomsSchema)
 module.exports = class Room {

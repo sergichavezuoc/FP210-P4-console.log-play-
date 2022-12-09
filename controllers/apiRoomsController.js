@@ -53,6 +53,80 @@ create: function(req, res) {
     })
   })
 },
+ocupationroom: function(req, res) {
+  var room2 = req.params.room
+  Rooms.findOne({number: room2}, function(err, room){
+    if(err) {
+      return res.status(500).json({
+        message: 'Se ha producido un error al guardar jugador in room',
+        error: err
+      })
+    }
+    if(!room) {
+      return res.status(404).json({
+        message: 'No hemos encontrado la room'
+      })
+    }
+    console.log(room)
+    if (room.player1!="" && room.player2!="") {
+      console.log(room)
+      return res.send('<i id="o'+room2+'" style="" class="fa fa-users fa-2x"></i>')
+    }
+    else if (room.player1==="" && room.player2==="") {
+      return res.send('<i id="o'+room2+'" style="" class="fa fa-user-times fa-2x"></i>');
+    }
+    else{
+      return res.send('<i id="o'+room2+'" style="" class="fa fa-user fa-2x"></i>');
+    }
+  })
+},
+userinroom: function(req, res) {
+  var room2 = req.params.room
+  var player = req.params.player
+console.log(room2);
+console.log(player);
+  Rooms.findOne({number: room2}, function(err, room){
+    if(err) {
+      return res.status(500).json({
+        message: 'Se ha producido un error al guardar jugador in room',
+        error: err
+      })
+    }
+    if(!room) {
+      return res.status(404).json({
+        message: 'No hemos encontrado la room'
+      })
+    }
+    if (room.player1!="" && room.player2!="") {
+      console.log(room)
+      return res.status(500).json({
+        message: 'Room is full',
+        error: err
+      })
+    }
+    else if (room.player1==="") {
+      room.player1=player;
+    }
+    else if (room.player==="") {
+      room.player2=player;
+    }
+    console.log(room);
+    room.save(function(err, room){
+      console.log(err)
+      if(err) {
+        return res.status(500).json({
+          message: 'Error al guardar la room'
+        })
+      }
+      if(!room) {
+        return res.status(404).json({
+          message: 'No hemos encontrado la room'
+        })
+      }
+      return res.json(room)
+    })
+  })
+},
 update: function(req, res) {
   var id = req.params.id
   Rooms.findOne({_id: id}, function(err, room){
@@ -67,12 +141,12 @@ update: function(req, res) {
         message: 'No hemos encontrado la room'
       })
     }
-    room.Number = req.body.number
-    room.Room =  req.body.room
-    room.Result = req.body.result
-    room.Winner = req.body.winner
-    room.Player1 = req.body.player1
-    room.Player2 = req.body.player2
+    room._id = req.body._id
+    room.room =  req.body.room
+    room.result = req.body.result
+    room.winner = req.body.winner
+    room.player1 = req.body.player1
+    room.player2 = req.body.player2
     room.save(function(err, room){
       if(err) {
         return res.status(500).json({

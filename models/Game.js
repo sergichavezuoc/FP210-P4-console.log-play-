@@ -4,7 +4,7 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var gameSchema = new Schema({
-  number: Number, 
+  number: String, 
   room: String, 
   result: Number,
   winner: String,
