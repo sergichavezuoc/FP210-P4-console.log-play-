@@ -68,13 +68,15 @@ sockserver.on('connection', (ws, req) => {
     [...clients.keys()].forEach((client) => {
       if (client.room === ws.room) {       
         // guardar en ws.game setresult y setganador
-        const data = JSON.stringify({ type: 'close', message: 'Opponent left the game. You won!' });
+        
         if (ws.game.result==="" && client.game.result===""){
+          const data = JSON.stringify({ type: 'close', message: 'Opponent left the game. You won!' });
           client.game.result="25";
           client.game.winner=client.player;
           insertGame(client.game)
+          client.send(data);
         }
-        client.send(data);
+        
       }
     })
     Rooms.findOne({number: ws.room}, function(err, roomToDelete){
@@ -122,7 +124,7 @@ function joine(ws, req) {
       else {
         if (client.room === ws.room) {
           ws.game = client.game;
-          client.game.setPlayer2(username);
+          client.game.player2=username;
           const data = JSON.stringify({ 'type': 'message', 'message': 'Start the game', 'opponentcolor': metadata.color });
           client.send(data);
         }

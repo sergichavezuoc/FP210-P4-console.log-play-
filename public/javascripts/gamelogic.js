@@ -48,6 +48,7 @@ webSocket.onmessage = (event) => {
         }
         if (typeof data.opponentcolor !== 'undefined') {
             $("#team2").css('background-color', 'hsl(' + data.opponentcolor + ',50%,50%)');
+            localStorage.setItem("opponentcolor", data.opponentcolor);
         }
     }
     if (data.type == 'movement') {
@@ -56,6 +57,7 @@ webSocket.onmessage = (event) => {
         $("#" + data.position).css("cursor", "not-allowed");
         $("#" + data.position).css("pointer-events", "none");
         if (data.color == localStorage.getItem("mycolor")) {
+            if ($('.' + data.color).length+ $('.' + localStorage.getItem("opponentcolor")).length===25){
             if ($('.' + data.color).length > 12) {
 
                 $(".canvas").css("cursor", "not-allowed");
@@ -63,15 +65,22 @@ webSocket.onmessage = (event) => {
                 window.alert("You Won");
                 const messageBody = { type: 'result', winner: user.username, result: $('.' + data.color).length };
                 webSocket.send(JSON.stringify(messageBody));
+                localStorage.removeItem('mycolor');
+                localStorage.removeItem('opponentcolor');
             }
+        }
             document.getElementById("team1").innerHTML = $('.' + data.color).length;
         }
         else {
+            if ($('.' + data.color).length+ $('.' + localStorage.getItem("mycolor")).length===25){
             if ($('.' + data.color).length > 12) {
                 $(".canvas").css("cursor", "not-allowed");
                 $(".canvas").css("pointer-events", "none");
                 window.alert("Your Opponent Won");
+                localStorage.removeItem('mycolor');
+                localStorage.removeItem('opponentcolor');
             }
+        }
             document.getElementById("team2").innerHTML = $('.' + data.color).length;
         }
     }
@@ -131,6 +140,14 @@ function makeMove(e) {
         document.getElementById(casilla).style.cursor="allowed";
         document.getElementById(casilla).style.pointerEvents="all";
       }
+      const arr = [11, 12, 13, 14, 15, 21, 22, 23, 24, 25, 31, 32, 33, 34, 35, 41, 42, 43, 44, 45, 51, 52, 53, 54, 55];
+        for (let i of arr) {
+            if($('#'+i.toString()).hasClass(localStorage.getItem("mycolor")) || $('#'+i.toString()).hasClass(localStorage.getItem("opponentcolor"))){
+                document.getElementById(i).style.cursor="not-allowed";
+                document.getElementById(i).style.pointerEvents="none";                       
+            }
+
+        }
     const messageBody = { type: 'movement', position: $(this).attr('id'), "room": room };
     webSocket.send(JSON.stringify(messageBody));
 };

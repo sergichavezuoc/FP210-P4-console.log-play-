@@ -14,6 +14,8 @@ var user = JSON.parse(localStorage.getItem('User'));
 user.room1=false;
 user.room2=false;
 user.room3=false;
+localStorage.removeItem('mycolor');
+localStorage.removeItem('opponentcolor');
 localStorage.setItem('User', JSON.stringify(user));
 var name = user.name;
 var avatar = document.getElementById("avatarChoose");

@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="/stylesheets/game.css">
+    <meta charset="utf-8" />
+<title>ZIM BITS - Tiles and Pads</title>
+
+<!-- Welcome to ZIM at https://zimjs.com - Code Creativity!              	        -->
+<!-- ZIM runs on the HTML Canvas powered by JavaScript and CreateJS https://createjs.com -->
+<!-- Founded by Inventor Dan Zen - http://danzen.com - Canadian New Media Award Winner 	-->
+<!-- ZIM is free to use. You can donate to help improve ZIM at http://zimjs.com/donate 	-->
+
+<script src="https://zimjs.org/cdn/1.3.4/createjs.js"></script>
+<script src="https://zimjs.org/cdn/01/zim_min.js"></script>
+<!-- use zimjs.com/distill for minified individual functions! -->
+
+<script src="https://zimjs.com/bits/footer10.js"></script><!-- you will not need this -->
+
+<script>
+
+// SCALING OPTIONS
+// scaling can have values as follows with full being the default
+// FIT	sets canvas and stage to dimensions and scales to fit inside window size
+// FILL	sets canvas and stage to dimensions and scales to fit outside window size
+// FULL	sets stage to window size with no scaling
+// "tagID"	add canvas to HTML tag of ID - set to dimensions if provided - no scaling
+
+const scaling = "canvas"; // this will resize to fit inside the screen dimensions
+const width = 800;
+const height = 800;
+const color = darker;
+const outerColor = light;
+
+new Frame(scaling, width, height, color, outerColor, ready);
+function ready() {
+	
+	// given F (Frame), S (Stage), W (width), H (height)
+
+	// ZIM BITS - Tile and Pad (2016 - updated 2022)
+
+	// often we tile - for instance to make a game board or a set of icons
+	// This example will show a manual tiling using hitTestGrid for interaction
+	// and a Pad example where buttons are made in a tiled grid
+
+	// STEPS - TILES
+	// 1. declare configuration variables
+	// 2. make a Tile()
+	// 3. add stagemousemove event to check for rollover
+	// 4. use hitTestGrid() to find index of tile under the cursor
+	// 5. adjust tile if cursor is over tile (could set back to start color if not)
+	// 6. add click event and capture e.target
+	// 7. make any desired changes on click
+
+	// STEPS - PAD
+	// 1. make a Pad()
+	// 2. add an event for when the pad changes
+
+
+	// TILE
+	// 1. declare configuration variables
+	const cols = 5;
+	const rows = 5;
+	const num = cols * rows;
+	const size = 100;
+	const spacing = 5;
+	let square;
+	const w = cols*(size+spacing); // used later in roll test
+	const h = rows*(size+spacing);
+
+	// 2. make a Tile()
+	const board = new Tile(new Rectangle(size,size,brown), cols, rows, spacing, spacing)
+		.pos(150, 150)
+		.cur();
+
+	// OLD - this is some of the code that went in to making ZIM Tile()
+	// Tile() has since then become much more complex - see docs for dynamic tile parameters!
+
+	// // STEPS
+	// // 1. make a container for the tiles
+	// // 2. declare configuration variables
+	// // 3. loop through the tiles adding a tile each loop
+	// // 4. position the tile using modulus (%) and Math.floor() on division (or loop inside loop)
+	//
+	// // 1. make a container for the tiles
+	// const board = new Container()
+	// 	.pos(150, 250)
+	// 	.cur();
+	//
+	// // 2. declare configuration variables
+	// const cols = 10;
+	// const rows = 5;
+	// const num = cols * rows;
+	// const size = 35;
+	// const spacing = 5;
+	// const square;
+	// const w = cols*(size+spacing); // used later in roll test
+	// const h = rows*(size+spacing);
+	//
+	// // 3. loop through the tiles adding a tile each loop
+	// loop (num, function(i) {
+	// 	square = new Rectangle(size,size,brown)
+	// 		.addTo(board)
+	// 		// 4. position the tile using modulus (%) and Math.floor() on division (or loop inside loop)
+	// 		.pos(i%cols*(size+spacing), Math.floor(i/cols)*(size+spacing));
+	// });
+
+	// mouseover is slow in comparison to hitTestGrid()
+	// the default Frame() runs at 20 checks per second
+	// S.enableMouseOver(60); still slower than the hitTestGrid() on stagemousemove
+
+	// board.on("mouseover", function(e) {
+	// 	square = e.target;
+	// 	square.visible = false;
+	// 	S.update();
+	// })
+
+    square = board.getChildAt(13);
+    console.log(square);
+			if (square.color != blue && square.color != pink) {
+				square.color = "#FFF";
+				S.update();
+			}
+	// 6. add click event and capture e.target
+	board.on("click", function(e) {
+		square = e.target;
+        console.log(square);
+        window.alert(square.tileCol);
+        window.alert(square.tileRow);
+
+		// 7. make any desired changes on click
+		if (square.color != pink) {
+			square.color = pink;
+			S.update();
+		}
+	});
+
+
+
+
+} // end of ready
+
+</script>
+
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+
+</head>
+
+<body>
+    <div id="canvas"></div><div class="wrapper-info"><div class="wrapper-avatar" style="display: inline-block"> <img src="http://localhost:3000/images/guerrera.png" alt="" class="avatar"></div><h1 id="head">Welcome Sergi5 to room1</h1><p id="time">Wait for an opponent</p></div>
+<!-- canvas with id="myCanvas" is made by zim Frame -->
+</body>
+</html>

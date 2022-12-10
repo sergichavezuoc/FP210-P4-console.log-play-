@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use('/tile',express.static(__dirname + '/views/tile.html'));
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/bootstrap/js', express.static(__dirname + '/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'));
 app.use('/favicons', express.static(__dirname + '/node_modules/express-favicon/index.js'));
