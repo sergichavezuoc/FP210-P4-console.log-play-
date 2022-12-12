@@ -38,6 +38,22 @@ show: function(req, res) {
     return res.json(player)
   })
 },
+login: function(req, res) {
+  var player = new Players (req.body)
+  Players.findOne({username: player.username, password: player.password}, function(err, player){
+    if(err) {
+      return res.status(500).json({
+        message: 'Error getting player'
+      })
+    }
+    if(!player) {
+      return res.status(404).json( {
+        message: 'Player not found'
+      })
+    }
+    return res.json(player)
+  })
+},
 create: function(req, res) {
   var player = new Players (req.body)
   player.save(function(err, player){

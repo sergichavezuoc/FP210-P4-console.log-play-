@@ -11,6 +11,8 @@ $j('#myModalform').on('click', 'button.close', function (eventObject) {
 
 //DATA LOCALSTORAGE
 var user = JSON.parse(localStorage.getItem('User'));
+if (user.isLogged == false) { window.alert("No se puede acceder directamente"); window.location.href = "http://localhost:3000/"; }
+
 user.room1=false;
 user.room2=false;
 user.room3=false;
@@ -140,38 +142,7 @@ function drop(ev) {
         });
         request.fail(function() {
             alert( "Seleccion of room failed");
-          });
-          /** 
-           * fetch('/ocupation?room=' + ev.target.id + '&user=' + user.username).then(response => {
-            if (response.ok) {
-                document.getElementById("alert-text").innerHTML = 'Welcome to the room';
-                $j("#myModal").modal("show");
-                var onRoom = ev.target.id;
-                user[onRoom] = true;
-                localStorage.setItem('User', JSON.stringify(user));
-                ev.preventDefault();
-                var nodeCopy = document.getElementById(data).cloneNode(true);
-                nodeCopy.id = "newId"
-                ev.target.appendChild(nodeCopy);
-                roomSelected(ev.target.id);
-                console.log(ev.target.id)
-                document.getElementById(ev.target.id).innerHTML = document.getElementById(ev.target.id).innerHTML + '<input class="btn btn-primary" type="button" value="Get out" onClick=getOutRoom("' + ev.target.id + '","' + user.username + '") />';
-                document.getElementById(ev.target.id + "f").innerHTML = '<a href="javascript:entrar(\'' + ev.target.id + '\')">Entrar</a>';
-                document.getElementById("avatarChoose").setAttribute('draggable', false);
-            }
-©
-
-            else if (response.status == 201) {
-                document.getElementById("alert-text").innerHTML = 'You are in other room. Disconnect first';
-                $j("#myModal").modal("show");
-            }
-            else {
-                document.getElementById("alert-text").innerHTML = 'Room is full. Try another one';
-                $j("#myModal").modal("show");
-            }
-                        * user is alrealdy in other room
-            */
-        
+          });     
     }
     else {
         var nodeCopy = document.getElementById(data).cloneNode(true);
@@ -287,18 +258,34 @@ avatarPicker.addEventListener("click", function (event) {
 new Ajax.PeriodicalUpdater('oroom1', '/api/ocupationroom/room1', {
     method: 'get',
     frequency: 1,
-    decay: 2
+    decay: 0
   });
 new Ajax.PeriodicalUpdater('oroom2', '/api/ocupationroom/room2', {
     method: 'get',
     frequency: 1,
-    decay: 2
+    decay: 0
   });
 new Ajax.PeriodicalUpdater('oroom3', '/api/ocupationroom/room3', {
     method: 'get',
     frequency: 1,
-    decay: 2
+    decay: 0
   });
+  new Ajax.PeriodicalUpdater('room1p', '/api/roomhtml/room1', {
+    method: 'get',
+    frequency: 1,
+    decay: 0
+  });
+new Ajax.PeriodicalUpdater('room2p', '/api/roomhtml/room2', {
+    method: 'get',
+    frequency: 1,
+    decay: 0
+  });
+new Ajax.PeriodicalUpdater('room3p', '/api/roomhtml/room3', {
+    method: 'get',
+    frequency: 1,
+    decay: 0
+  });
+
 
 
 

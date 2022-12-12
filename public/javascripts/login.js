@@ -1,32 +1,48 @@
 
-var boton = document.querySelector("#login");
-
-boton.addEventListener('click', function () {
-    var username = document.getElementById('email').value;
+function handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const value = Object.fromEntries(data.entries());
+    var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
 
     $j.ajax({
-        url: '/api/player/'+username,
-        type: 'GET',
+        url: '/api/player/login/',
+        type: 'POST',
         contentType: 'application/json',
+        data: JSON.stringify(value, null, '  '),
         success: (data) => {
             console.log(data);
-            if (data.password===password){
+            if (data.username){
                 var user =JSON.parse(localStorage.getItem("User"));
-                user.username=username;
-                user.name=data.name;
-                user.isLogged= true;
+                //window.alert(user)
+                if (user===null){
+                    var user = {
+                        'name': data.name,
+                        'username': username,
+                        'avatar': "http://localhost:3000/images/guerrera.png",
+                        'isLogged': true,
+                        'room1': false,
+                        'room2': false,
+                        'room3': false
+                    }
+                } else {
+                    user.username=username;
+                    user.name=data.name;
+                    user.isLogged= true;
+                }
+ 
                 localStorage.setItem('User', JSON.stringify(user))
             window.location.assign("/game-app")
-            } else {
-            document.getElementById('helper').style.visibility = "visible"
             }
-    }
-    
+            },
+            error: () => {
+            document.getElementById('helper').style.visibility = "visible"
+            }    
 });
-
-
-});
+};
+const form = document.getElementById("formlogin");
+form.addEventListener('submit', handleSubmit);
 $j('#myModal').on('click', 'button.close', function (eventObject) {
     $j('#myModal').modal('hide');
 });

@@ -256,6 +256,9 @@ var apiRoomsController = require ('../controllers/apiRoomsController')
         } */
 
   })
+  router.post('/api/player/login/', function(req, res) {
+    apiPlayersController.login(req, res)
+  })
   router.get('/api/player/:id', function(req, res) {
     apiPlayersController.show(req, res)
     // #swagger.summary = 'Get ONE Player. '
@@ -563,4 +566,7 @@ var apiRoomsController = require ('../controllers/apiRoomsController')
                     }
                   }*/
   })
+  router.get('/api/roomhtml/:id', function(req, res) {
+    apiRoomsController.showhtml(req, res)
+  });
 module.exports = router;

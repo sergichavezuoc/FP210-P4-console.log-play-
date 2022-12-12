@@ -38,6 +38,34 @@ show: function(req, res) {
     return res.json(room)
   })
 },
+showhtml: function(req, res) {
+  var id = req.params.id
+  var response="<p>";
+  var separador="";
+  Rooms.findOne({number: id}, function(err, room){
+    if(err) {
+      return res.status(500).json({
+        message: 'Error getting room'
+      })
+    }
+    if(!room) {
+      return res.status(404).json( {
+        message: 'Room not found'
+      })
+    }
+    if (room.player1!="")
+    {
+      response= response +room.player1;
+      separador="<br />";
+    }
+    if (room.player2!="")
+    {
+      response= response + separador + room.player2;
+    }
+    response=response + "</p>";
+    return res.send(response);
+  })
+},
 create: function(req, res) {
   var room = new Rooms (req.body)
   room.save(function(err, room){
@@ -107,7 +135,7 @@ console.log(player);
     else if (room.player1==="") {
       room.player1=player;
     }
-    else if (room.player==="") {
+    else if (room.player2==="") {
       room.player2=player;
     }
     console.log(room);
