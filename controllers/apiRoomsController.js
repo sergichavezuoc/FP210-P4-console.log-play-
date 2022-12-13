@@ -40,7 +40,7 @@ show: function(req, res) {
 },
 showhtml: function(req, res) {
   var id = req.params.id
-  var response="<p>";
+  var response="";
   var separador="";
   Rooms.findOne({number: id}, function(err, room){
     if(err) {
@@ -62,7 +62,10 @@ showhtml: function(req, res) {
     {
       response= response + separador + room.player2;
     }
-    response=response + "</p>";
+    if (response!=""){
+      response="Players in room:<p> "+response + "</p>";
+    }
+ 
     return res.send(response);
   })
 },

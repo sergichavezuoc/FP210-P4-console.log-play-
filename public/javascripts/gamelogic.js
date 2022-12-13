@@ -2,8 +2,9 @@
 
 localStorage.removeItem("mycolor");
 var user = JSON.parse(localStorage.getItem('User'));
-if (user == null) { window.alert("No se puede acceder directamente"); window.location.href = "http://localhost:3000/"; }
-if (user.room1 == false && user.room2 == false & user.room3 == false) { window.alert("No se puede acceder sin sala"); window.location.href = "http://localhost:3000/game-app"; }
+if (user == null) { window.alert("This page requires validation"); window.location.href = "http://localhost:3000/"; }
+if (user.isLogged == false) { window.alert("This page requires validation"); window.location.href = "http://localhost:3000/"; }
+if (user.room1 == false && user.room2 == false & user.room3 == false) { window.alert("A Room has to be chosen"); window.location.href = "http://localhost:3000/game-app"; }
 let room = "";
 if (user.room1 == true) { room = "room1" };
 if (user.room2 == true) { room = "room2" };
@@ -56,7 +57,17 @@ webSocket.onmessage = (event) => {
         $("#" + data.position).addClass('' + data.color + '');
         $("#" + data.position).css("cursor", "not-allowed");
         $("#" + data.position).css("pointer-events", "none");
+        var pTotal=Math.round(($('.' + localStorage.getItem("mycolor")).length+ $('.' + localStorage.getItem("opponentcolor")).length)/25*100);
+        var pYou=Math.round($('.' + localStorage.getItem("mycolor")).length/25*100);
+        var pOpponent = Math.round($('.' + localStorage.getItem("opponentcolor")).length/25*100);
+        document.getElementById("myBar").style.width=pTotal+"%";  
+        document.getElementById("myBarY").style.width=pYou+"%"; 
+        document.getElementById("myBarO").style.width=pOpponent+"%";  
+        $("#pTotal").html("Total "+pTotal+"%");
+        $("#pYou").html("You "+pYou+"%");
+        $("#pOpponent").html("Opponent "+pOpponent+"%");
         if (data.color == localStorage.getItem("mycolor")) {
+            
             if ($('.' + data.color).length+ $('.' + localStorage.getItem("opponentcolor")).length===25){
             if ($('.' + data.color).length > 12) {
 

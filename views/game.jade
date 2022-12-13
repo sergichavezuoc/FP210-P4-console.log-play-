@@ -20,7 +20,17 @@ block content
               #team1.btn 0
             .btncontainer
               h2 Opponent
-              #team2.btn 0      
+              #team2.btn 0
+        .wrapper-bar
+            h3#pTotal Total
+            #myProgress
+              #myBar(style='width:0%') 
+            h3#pYou You
+            #myProgressY
+              #myBarY(style='width:0%') 
+            h3#pOpponent Opponent
+            #myProgressO
+              #myBarO(style='width:0%') 
       #wrapper-game
         #board-game
           canvas#11.canvas(width='100' height='100' style='border:1px solid #000000;')

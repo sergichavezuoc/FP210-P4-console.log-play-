@@ -11,7 +11,7 @@ $j('#myModalform').on('click', 'button.close', function (eventObject) {
 
 //DATA LOCALSTORAGE
 var user = JSON.parse(localStorage.getItem('User'));
-if (user.isLogged == false) { window.alert("No se puede acceder directamente"); window.location.href = "http://localhost:3000/"; }
+if (user.isLogged == false) { window.alert("This page requires validation"); window.location.href = "http://localhost:3000/"; }
 
 user.room1=false;
 user.room2=false;
@@ -137,7 +137,8 @@ function drop(ev) {
                     console.log(ev.target.id)
                     document.getElementById(ev.target.id).innerHTML = document.getElementById(ev.target.id).innerHTML + '<input class="btn btn-primary" type="button" value="Get out" onClick=getOutRoom("' + ev.target.id + '","' + user.username + '") />';
                     document.getElementById(ev.target.id + "f").innerHTML = '<a href="javascript:entrar(\'' + ev.target.id + '\')">Entrar</a>';
-                    document.getElementById("avatarChoose").setAttribute('draggable', false);            
+                    document.getElementById("avatarChoose").setAttribute('draggable', false); 
+                    document.getElementById("newId").setAttribute('draggable', false);            
                 }   
         });
         request.fail(function() {

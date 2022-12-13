@@ -66,10 +66,10 @@ sockserver.on('connection', (ws, req) => {
 
   ws.on('close', () => {
     [...clients.keys()].forEach((client) => {
-      if (client.room === ws.room) {       
+      if (client.room === ws.room && client!=ws) {       
         // guardar en ws.game setresult y setganador
-        
-        if (ws.game.result==="" && client.game.result===""){
+        console.log("result"+ws.game.result+ client.game.result)
+        if (ws.game.result===null && client.game.result===null){
           const data = JSON.stringify({ type: 'close', message: 'Opponent left the game. You won!' });
           client.game.result="25";
           client.game.winner=client.player;
