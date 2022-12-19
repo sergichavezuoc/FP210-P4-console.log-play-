@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "My API",
-    "description": "Description",
+    "title": "Console.log(play) API",
+    "description": "API explanation with example. Available for integrations with third parties",
     "version": "1.0.0"
   },
   "host": "localhost:3000",
@@ -807,6 +807,105 @@
               "required": [
                 "message",
                 "err"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/player/login/": {
+      "post": {
+        "tags": [
+          "Players"
+        ],
+        "summary": "Player Login. ",
+        "description": "Endpoint to Player by username and password. ",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Player Object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345"
+                }
+              },
+              "required": [
+                "username",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Player found.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Juan"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "j@j.es"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345"
+                }
+              },
+              "required": [
+                "name",
+                "username",
+                "password"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Player not found.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Player not found"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error searching Player.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error searching player"
+                }
+              },
+              "required": [
+                "message"
               ],
               "xml": {
                 "name": "main"
@@ -1712,6 +1811,65 @@
                 "message": {
                   "type": "string",
                   "example": "Error updating player"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/roomhtml/{id}": {
+      "get": {
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Room ocupation. ",
+        "description": "Endpoint to get room ocupation in HTML. ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Players in room: xxxx",
+            "body": "Players in room: xxxx"
+          },
+          "404": {
+            "description": "Error locating Room.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Room not found"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error locating Room.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error locating room"
                 }
               },
               "required": [

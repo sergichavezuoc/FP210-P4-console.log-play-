@@ -258,6 +258,37 @@ var apiRoomsController = require ('../controllers/apiRoomsController')
   })
   router.post('/api/player/login/', function(req, res) {
     apiPlayersController.login(req, res)
+    // #swagger.summary = 'Player Login. '
+    // #swagger.description = 'Endpoint to Player by username and password. '
+      // #swagger.tags = ['Players']
+            /*    #swagger.parameters['obj'] = {
+                in: 'body',
+                description: 'Player Object',
+                schema: { 
+                  $username: "j@j.es", 
+                  $password: "12345"
+                }
+        } */
+            /* #swagger.responses[200] = {
+            description: 'Player found.',
+            schema: { 
+                  $name: "Juan",
+                  $username: "j@j.es", 
+                  $password: "12345"
+                    }
+            } */
+            /* #swagger.responses[404] = {
+            description: 'Player not found.',
+            schema: { 
+                    $message: 'Player not found' 
+                    }
+            } */
+            /* #swagger.responses[500] = {
+            description: 'Error searching Player.',
+            schema: { 
+                    $message: 'Error searching player'
+                    }
+            } */
   })
   router.get('/api/player/:id', function(req, res) {
     apiPlayersController.show(req, res)
@@ -568,5 +599,24 @@ var apiRoomsController = require ('../controllers/apiRoomsController')
   })
   router.get('/api/roomhtml/:id', function(req, res) {
     apiRoomsController.showhtml(req, res)
+    // #swagger.summary = 'Room ocupation. '
+    // #swagger.description = 'Endpoint to get room ocupation in HTML. '
+    // #swagger.tags = ['Rooms']
+              /* #swagger.responses[200] = {
+            description: 'Players in room: xxxx',
+            body: 'Players in room: xxxx'
+              } */
+            /* #swagger.responses[404] = {
+            description: 'Error locating Room.',
+            schema: { 
+                    $message: 'Room not found' ,
+                    }
+        } */
+            /* #swagger.responses[500] = {
+            description: 'Error locating Room.',
+            schema: { 
+                    $message: 'Error locating room' ,
+                    }
+        } */
   });
 module.exports = router;
