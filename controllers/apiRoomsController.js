@@ -116,47 +116,68 @@ userinroom: function(req, res) {
   var player = req.params.player
 console.log(room2);
 console.log(player);
-  Rooms.findOne({number: room2}, function(err, room){
-    if(err) {
-      return res.status(500).json({
-        message: 'Error saving player in room',
-        error: err
-      })
-    }
-    if(!room) {
-      return res.status(404).json({
-        message: 'Room not found'
-      })
-    }
-    if (room.player1!="" && room.player2!="") {
-      console.log(room)
-      return res.status(500).json({
-        message: 'Room is full',
-        error: err
-      })
-    }
-    else if (room.player1==="") {
-      room.player1=player;
-    }
-    else if (room.player2==="") {
-      room.player2=player;
-    }
-    console.log(room);
-    room.save(function(err, room){
-      console.log(err)
-      if(err) {
-        return res.status(500).json({
-          message: 'Error saving room'
-        })
-      }
-      if(!room) {
-        return res.status(404).json({
-          message: 'Room not found'
-        })
-      }
-      return res.json(room)
+previous=false;
+Rooms.findOne({player1: player}, function(err, room){
+  if(room) {
+    return res.status(404).json({
+      message: 'You are already in Room '+room.number
     })
-  })
+  }
+  else {
+    Rooms.findOne({player2: player}, function(err, room){
+      if(room) {
+        return res.status(404).json({
+          message: 'You are already in Room '+room.number
+        })
+      }
+      else {
+        Rooms.findOne({number: room2}, function(err, room){
+          if(err) {
+            return res.status(500).json({
+              message: 'Error saving player in room',
+              error: err
+            })
+          }
+          if(!room) {
+            return res.status(404).json({
+              message: 'Room not found'
+            })
+          }
+          if (room.player1!="" && room.player2!="") {
+            console.log(room)
+            return res.status(500).json({
+              message: 'Room is full',
+              error: err
+            })
+          }
+          else if (room.player1==="") {
+            room.player1=player;
+          }
+          else if (room.player2==="") {
+            room.player2=player;
+          }
+          console.log(room);
+          room.save(function(err, room){
+            console.log(err)
+            if(err) {
+              return res.status(500).json({
+                message: 'Error saving room'
+              })
+            }
+            if(!room) {
+              return res.status(404).json({
+                message: 'Room not found'
+              })
+            }
+            return res.json(room)
+          })
+        })
+      }  
+    });
+  }  
+});
+
+
 },
 update: function(req, res) {
   var id = req.params.id

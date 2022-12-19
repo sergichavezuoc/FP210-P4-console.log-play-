@@ -80,8 +80,10 @@ function handleSubmit(event) {
         data: JSON.stringify(value, null, '  '),
         success: (data) => {
             console.log(data);
-                $j("#myModalformcontent").html("Profile Updated!");
- 
+            user.name=data.name;
+            localStorage.setItem('User', JSON.stringify(user));
+            $j("#myModalform").modal("hide");
+            alert( "Profile Updated!");
         }   
 });
 request.fail(function() {
@@ -98,6 +100,7 @@ request.fail(function() {
         type: 'DELETE',
         success: (data) => {
             console.log(data);
+            localStorage.removeItem('User');
             window.alert("Profile deleted");
             window.location.assign("/")
         },  
@@ -141,8 +144,10 @@ function drop(ev) {
                     document.getElementById("newId").setAttribute('draggable', false);            
                 }   
         });
-        request.fail(function() {
-            alert( "Seleccion of room failed");
+        request.fail(function(data) {
+            console.log(data.responseJSON.message);
+            document.getElementById("alert-text").innerHTML = "Seleccion of room failed: "+data.responseJSON.message;
+            $j("#myModal").modal("show");
           });     
     }
     else {
