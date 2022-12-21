@@ -1882,6 +1882,72 @@
           }
         }
       }
+    },
+    "/api/rooms/all-disconect": {
+      "post": {
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Leave all rooms ",
+        "description": "Endpoint to leave all rooms ocupation in case you get stuck due to an error. ",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "j@email.com"
+                }
+              },
+              "required": [
+                "username"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All rooms left",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "All rooms left"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error leaving the rooms",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error leaving the rooms"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
