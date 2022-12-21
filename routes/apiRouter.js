@@ -619,4 +619,29 @@ var apiRoomsController = require ('../controllers/apiRoomsController')
                     }
         } */
   });
+  router.post('/api/rooms/all-disconect', function(req, res){
+    apiRoomsController.disconectAllRooms(req, res)
+    // #swagger.summary = 'Leave all rooms '
+    // #swagger.description = 'Endpoint to leave all rooms ocupation in case you get stuck due to an error. '
+    // #swagger.tags = ['Rooms']
+             /*    #swagger.parameters['obj'] = {
+                in: 'body',
+                description: 'Object',
+                schema: {
+                  $username: "j@email.com",
+                }
+        } */
+        /* #swagger.responses[200] = {
+            description: 'All rooms left',
+            schema: { 
+                    $message: 'All rooms left'
+                    }
+            } */
+            /* #swagger.responses[500] = {
+            description: 'Error leaving the rooms',
+            schema: { 
+                    $message: 'Error leaving the rooms'
+                    }
+            } */
+  })
 module.exports = router;

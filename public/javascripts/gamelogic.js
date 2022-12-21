@@ -39,6 +39,13 @@ function unfade(element) {
 webSocket.onmessage = (event) => {
     const data = JSON.parse(event.data);
     if (data.type == 'message') {
+        
+        if(data.message === "Start the game"){
+            $(".canvas").css("cursor", "allowed");
+            $(".canvas").css("pointer-events", "all");
+        }
+        
+        
         el = document.getElementById('time');
         el.innerHTML = data.message;
         if (typeof data.yourcolor !== 'undefined') {
@@ -66,8 +73,8 @@ webSocket.onmessage = (event) => {
         $("#pTotal").html("Total "+pTotal+"%");
         $("#pYou").html("You "+pYou+"%");
         $("#pOpponent").html("Opponent "+pOpponent+"%");
+        
         if (data.color == localStorage.getItem("mycolor")) {
-            
             if ($('.' + data.color).length+ $('.' + localStorage.getItem("opponentcolor")).length===25){
             if ($('.' + data.color).length > 12) {
 
@@ -165,5 +172,10 @@ function makeMove(e) {
 
 $(document).ready(function(){
     document.getElementById("head").innerHTML="Welcome "+ user.name+" to "+room;
-    $('img').attr('src', user.avatar);
+    $('#my-avatar').attr('src', user.avatar);
+    
+     $(".canvas").css("cursor", "not-allowed");
+    $(".canvas").css("pointer-events", "none");
+    
+   
 })

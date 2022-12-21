@@ -3,7 +3,27 @@
   width: 100%;
   height: 100%;
   background-color: rgb(174, 253, 140);
+  background-image: linear-gradient(
+    to bottom right,
+    #64bb70 0%,
+    #94e443 20%,
+    #f1f434 40%,
+    #e8860d 60%,
+    #ee1313 80%
+);
 
+background-size: 200% 200%;
+
+animation: movimiento 5s linear infinite alternate;
+}
+
+@keyframes movimiento {
+from{
+    background-position: 0 0;
+}
+to{
+    background-position: 100% 100%;
+}
 }
 .header{
   background-color: #1a1a1a;
@@ -20,18 +40,31 @@
   padding-left: 20px;
 }
 .wrapper-header{
-  background-color: #667cf7;
+  background-color: rgba(11, 10, 10, 0.652);
   padding: 20px;
   display: flex;
   flex-direction: row;
   justify-content:flex-start;
   align-items: center;
+  width: 100%;
+}
+.wrapper-left{
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+
+}
+.wrapper-right{
+  width: 30%;
+  align-items: flex-end;
 }
 .wrapper-info{
+  width: 20%;
   padding: 20px;
-  background-color: white;
+  background-color: rgba(11, 10, 10, 0.652);
+  color: white;
   border-radius: 10px;
-  box-shadow: 10px 10px 5px #1b3774;;
+  box-shadow: 10px 10px 5px #000000;;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,41 +100,47 @@
 }
 
 .wrapper-score{
-  width: 100%;
+  width: 60%;
   display: flex;
   align-items: center;
-  padding-left: 225px;
-
 }
 .wrapper-bar{
   width: 100%;
-  display: flex;
-  align-items: left;
   padding-left: 20px;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  color: white;
+}
+h3{
+  font-size: 23px;
 }
 
 .container-score{
+  width: 100%;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
- 
   padding-top: 20px;
-  box-shadow: inset 0px 0px 20px #05086c;
+  box-shadow: inset 0px 0px 20px #000000;
   border-radius: 10px;
 }
 
 .btncontainer {
   display: flex;
   padding: 15px;
- 
-  background-color: #aab7ff;
+  box-shadow: 1px 1px 5px #c1ff00, -1px -1px 5px #c1ff00;
+  background-color: #c1ff00;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin: 0 45px 20px 45px;
   text-align: center;
+}
+.btncontainer h2{
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .btn {
   width: 70px;
@@ -129,7 +168,7 @@
 #board-game{
   width: 600px;
   height: 600px;
-  background-color: rgb(241, 249, 235);
+  background-color:rgba(11, 10, 10, 0.652);
   padding-left: 45px;
   padding-top: 35px;
 }
@@ -157,11 +196,15 @@
   }
   #myProgress, #myProgressY, #myProgressO {
     width: 100%;
-    background-color: #ddd;
+    height: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px white;
   }
   
   #myBar,#myBarY,#myBarO {
     width: 1%;
-    height: 30px;
-    background-color: #04AA6D;
+    height: 20px;
+    background-color: #c1ff00;
+    box-shadow: 0px 2px 6px #c1ff00, 0px -2px 6px #c1ff00;
   }

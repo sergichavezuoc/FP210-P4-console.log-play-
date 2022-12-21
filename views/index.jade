@@ -4,33 +4,44 @@ block content
   script.
       $j = jQuery.noConflict();
   .wrapper-main
-    .wrapper-content
-      form#formlogin 
-        #helper.helper-wrapper 
-          .helper-content 
-           p The username os password is incorrect or the user doesn't exists 
-        .mb-3.row
-          label.col-sm-2.col-form-label.text-light Email
-          .col-sm-9.px-4 
-            input#username.form-control(type=text name="username")
-        .mb-3.row 
-          label.col-sm-2.col-form-label.text-light Password
-          .col-sm-9.px-4 
-            input#password.form-control(type=text name="password")
-        .d-grip.gap-2
-          button#submit.btn.btn-primary.btn-outline-warning(type="submit") Log in
-        .wrapper-register-login 
-          p Don't have account? <a href="/register">Create one</a>
-          p
-            button#showresults Show Results
-      #myModal.modal.fade(role='dialog')
-        .modal-dialog
-            .modal-content
-                .modal-header(style='background-color:rgb(174, 253, 140)')
-                    button.close(type='button' data-dismiss='modal') ×
-                    h4.modal-title Console.log(play)
-                .modal-body(style='background-color:#ffffe6;color:#000')
-                    p#alert-text(style='color:#000')
+    .middle-wrapper-left
+      .wrapper-login
+        .wrapper-content
+          form#formlogin 
+            #helper.helper-wrapper 
+              .helper-content 
+              p The username os password is incorrect or the user doesn't exists 
+            .mb-3.row
+              label.col-sm-2.col-form-label.text-light Email
+              .col-sm-9.px-4 
+                input#username.form-control(type=text name="username")
+            .mb-3.row 
+              label.col-sm-2.col-form-label.text-light Password
+              .col-sm-9.px-4 
+                input#password.form-control(type=text name="password")
+            .d-grip.gap-2
+              button#submit.btn.btn-primary.btn-outline-warning(type="submit") Log in
+            .wrapper-register-login 
+              p Don't have account? <a href="/register">Create one</a>
+              p
+                
+          #myModal.modal.fade(role='dialog')
+            .modal-dialog
+                .modal-content
+                    .modal-header(style='background-color:rgb(174, 253, 140)')
+                        button.close(type='button' data-dismiss='modal') ×
+                        h4.modal-title Console.log(play)
+                    .modal-body(style='background-color:#ffffe6;color:#000')
+                        p#alert-text(style='color:#000')
+    .middle-wrapper-right
+      .middle-content
+        .wrapper-middle-info
+        .wrapper-welcome
+          .wrapper-header 
+            p Welcome to Console.log play. The best play to have fun with friends. Come in and find out.
+            i.fa.fa-gamepad.fa-lg.text-light
+        
+      
 block scripts
   script(src="/javascripts/login.js")  
   script(src="/javascripts/ajaxResults.js")  

@@ -7,13 +7,18 @@ block content
         $j = jQuery.noConflict();
     #wrapper-main 
         .wrapper-header
-            .wrapper-log-out
+            .wrapper-menu 
+                i.fa.fa-gamepad.fa-lg.text-light
                 span#results
                     buton#showresults(style='color: white; padding-left: 5px') Show Results&nbsp;&nbsp;
                 span#profile
                     buton#profileshow(style='color: white; padding-left: 5px') Update profile&nbsp;&nbsp;
                 span#dprofile
                     buton#deleteprofile(style='color: white; padding-left: 5px') Delete profile&nbsp;&nbsp;
+                span#tutorials
+                    buton#get-tutorials(style='color: white; padding-left: 5px') Tutorials&nbsp;&nbsp;
+       
+            .wrapper-log-out
                 span#log-out
                     | Log out
                     i.fa.fa-sign-out.fa-lg(style='color: white; padding-left: 5px')        
@@ -23,7 +28,7 @@ block content
                     #avatar-picker(ondrop='drop(event)' ondragover='allowDrop(event)')
                         span#user-name
                         img#avatarChoose(draggable='true' ondragstart='drag(event)' src='')
-                        i#avatarChange.fas.fa-caret-square-down
+                        i#avatarChange.fa.fa-caret-down.fa-lg
                     #wrapper-selector 
                         #avatar-selector 
                             .avatar-row 
@@ -47,16 +52,9 @@ block content
                     h1 Welcome to console.log(play) game 
                     .wrapper-helper 
                         span To start playing choose a room.
-                        span In each room you can play up to two players maximum.
-                        span Drag an drop your avatar to choose one room.
-                        span 
-                            i.fas.fa-lg.fa-user-friends
-                            | Room is full 
-                            i.fas.fa-lg.fa-user-alt
-                            | One person in the room  
-                            i.fas.fa-lg.fa-user-alt-slash
-                            | Room is empty
+                        
             .wrapper-rooms 
+                button#get-out-all Get out
                 #containerRooms.container-rooms
                     .wrapper-container 
                         .wrapper-ocupation 
@@ -85,35 +83,53 @@ block content
     #myModalform.modal.fade(role='dialog')
         .modal-dialog
             .modal-content
-                .modal-header(style='background-color:rgb(174, 253, 140)')
+                .modal-header
                     button.close(type='button' data-dismiss='modal') ×
                     h4.modal-title Console.log(play)
-                .modal-body(style='background-color:#ffffe6')
+                .modal-body
                     p#myModalformcontent
-                    form#updateProfile
-                        .mb-3.row
-                        label.col-sm-2.col-form-label(style='color: #000') Name
-                        .col-sm-9.px-4 
-                        input#name.form-control(type=text name="name")
-                        .mb-3.row
-                        label.col-sm-2.col-form-label(style='color: #000') Email
-                        .col-sm-9.px-4 
-                        input#username.form-control(type=text name="username")
-                        .mb-3.row 
-                        label.col-sm-2.col-form-label(style='color: #000') Password
-                        .col-sm-9.px-4 
-                        input#password.form-control(type=text name="password")
+                    form#updateProfile.px-3
+                        .mb-3.row.px-3
+                            label.col-sm-2.col-form-label Name
+                            input#name.form-control.bg-dark(type=text name="name")
+                        .mb-3.row.px-3
+                            label.col-sm-2.col-form-label Email
+                            input#username.form-control.bg-dark(type=text name="username")
+                        .mb-3.row.px-3 
+                            label.col-sm-2.col-form-label Password
+                            input#password.form-control.bg-dark(type=text name="password")
                         .d-grip.gap-2
-                        button#profileshow.btn.btn-primary.btn-outline-warning Update Profile                             
+                            button#profileshow.btn.btn-primary.btn-outline-warning.w-100 Update Profile                             
     #myModal.modal.fade(role='dialog')
         .modal-dialog
             .modal-content
-                .modal-header(style='background-color:rgb(174, 253, 140)')
+                .modal-header
                     button.close(type='button' data-dismiss='modal') ×
                     h4.modal-title Console.log(play)
-                .modal-body(style='background-color:#ffffe6')
+                .modal-body
                     p#alert-text
-    
+    #ModalTutorials.modal.fade(role="dialog")
+        .modal-dialog 
+            .modal-content 
+                .modal-header 
+                    button.close(type='button' data-dismiss='modal') ×
+                    h4.modal-title Console.log(play)
+                .modal-body 
+                    p 1. To start playing drag your avatar into a room
+                    p 2. When the room is full, you will be indicated by the informative icons at the top
+                    p 3. If you want to enter into the room press the button "Go into"
+                    p 4. If you want to exit press the button "Get out"
+    #ModalDelete.modal.fade(role='dialog')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button' data-dismiss='modal') ×
+                    h4.modal-title Console.log(play)
+                .modal-body
+                    p Are you sure you want to delete your profile ?
+                    .modal-footer 
+                    button#yes Yes 
+                    button#no No
 block scripts
     script(src="/javascripts/game-app.js")
     script(src="/javascripts/ajaxResults.js")
