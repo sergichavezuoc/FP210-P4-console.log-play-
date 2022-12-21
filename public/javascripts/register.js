@@ -82,7 +82,7 @@
                         var newObject = {
                             'name': name,
                             'username': username,
-                            'avatar': avatarChoose.src.replace('http://localhost:8888', ''),
+                            'avatar': avatarChoose.src.replace('http://localhost:3000', ''),
                             'isLogged': false,
                             'room1': false,
                             'room2': false,

@@ -56,6 +56,9 @@ $j('#get-tutorials').on('click', function (eventObject) {
 $j('#ModalTutorials').on('click', 'button.close', function (eventObject) {
     $j('#ModalTutorials').modal('hide');
 });
+$j('#ModalDelete').on('click', 'button.close', function (eventObject) {
+    $j('#ModalDelete').modal('hide');
+});
 
 
 //LOG OUT
