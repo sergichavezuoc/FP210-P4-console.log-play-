@@ -12,7 +12,6 @@ function handleSubmit(event) {
         contentType: 'application/json',
         data: JSON.stringify(value, null, '  '),
         success: (data) => {
-            console.log(data);
             if (data.username){
                 var user =JSON.parse(localStorage.getItem("User"));
                 //window.alert(user)
@@ -33,7 +32,7 @@ function handleSubmit(event) {
                 }
  
                 localStorage.setItem('User', JSON.stringify(user))
-            window.location.assign("/game-app")
+                window.location.assign("/game-app")
             }
             },
             error: () => {

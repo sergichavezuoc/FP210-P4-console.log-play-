@@ -15,7 +15,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 // Incluyo MongoDB
-const {createCollection, createCollectionJugadores, getSalas, createCollectionGame, createConnection} = require("./js/db");
+const {createCollection, createCollectionJugadores, createCollectionGame, createConnection} = require("./js/db");
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,7 +32,6 @@ createConnection();
 createCollection();
 createCollectionGame();
 createCollectionJugadores();
-getSalas(rooms);
 app.use(indexRouter);
 app.use(apiRouter);
 

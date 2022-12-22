@@ -141,7 +141,7 @@ function drop(ev) {
                 ev.target.appendChild(nodeCopy);
                 roomSelected(ev.target.id);
                 document.getElementById(ev.target.id).innerHTML = document.getElementById(ev.target.id).innerHTML + '<input class="btn btn-primary" type="button" value="Get out" onClick=getOutRoom("' + ev.target.id + '","' + user.username + '") />';
-                document.getElementById(ev.target.id + "f").innerHTML = '<a href="javascript:entrar(\'' + ev.target.id + '\')">Entrar</a>';
+                document.getElementById(ev.target.id + "f").innerHTML = '<a href="javascript:entrar(\'' + ev.target.id + '\')">Access</a>';
                 document.getElementById("avatarChoose").setAttribute('draggable', false);
                 document.getElementById("newId").setAttribute('draggable', false);
             }

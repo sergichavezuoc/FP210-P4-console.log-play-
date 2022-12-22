@@ -70,8 +70,8 @@ create: function(req, res) {
   })
 },
 update: function(req, res) {
-  var id = req.params.id
-  Players.findOne({username: id}, function(err, player){
+  var username = req.params.id
+  Players.findOne({username: username}, function(err, player){
     if(err) {
       return res.status(500).json({
         message: 'Error saving player',

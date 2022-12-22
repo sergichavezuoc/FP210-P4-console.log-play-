@@ -1,5 +1,8 @@
 //const src = require("debug");
 
+window.onbeforeunload = function(e) {
+    window.location.assign("/")
+};
 localStorage.removeItem("mycolor");
 var user = JSON.parse(localStorage.getItem('User'));
 if (user == null) { window.alert("This page requires validation"); window.location.href = "http://localhost:3000/"; }

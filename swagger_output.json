@@ -1002,7 +1002,7 @@
           "Players"
         ],
         "summary": "Modify Player. ",
-        "description": "Endpoint to modifiy Player filtering by Player Id. ",
+        "description": "Endpoint to modifiy Player filtering by Player username. ",
         "parameters": [
           {
             "name": "id",

@@ -68,7 +68,6 @@
             event.preventDefault();
             const data = new FormData(event.target);
             const value = Object.fromEntries(data.entries());
-            console.log(JSON.stringify(value, null, '  '));
             var username = document.getElementById('email').value;
             var name = document.getElementById('name').value;
             $.ajax({
@@ -77,7 +76,6 @@
                 contentType: 'application/json',
                 data: JSON.stringify(value, null, '  '),
                 success: (data) => {
-                    console.log(data);
                     if (data.message=="saved") {
                         var newObject = {
                             'name': name,

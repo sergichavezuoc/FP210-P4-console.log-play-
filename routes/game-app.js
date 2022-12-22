@@ -32,7 +32,6 @@ sockserver.on('connection', (ws, req) => {
       });
     }
     if(message.type === 'result'){
-      console.log(ws)
       ws.game.result=message.result;
       ws.game.winner=message.winner
       insertGame(ws.game)
@@ -40,7 +39,6 @@ sockserver.on('connection', (ws, req) => {
         
         roomToDelete.player1="";
         roomToDelete.player2="";
-        console.log(roomToDelete)
         roomToDelete.save(function(err, roomToDelete){
           console.log(err)
           if(err) {
@@ -68,7 +66,6 @@ sockserver.on('connection', (ws, req) => {
     [...clients.keys()].forEach((client) => {
       if (client.room === ws.room && client!=ws) {       
         // guardar en ws.game setresult y setganador
-        console.log("result"+ws.game.result+ client.game.result)
         if (ws.game.result===null && client.game.result===null){
           const data = JSON.stringify({ type: 'close', message: 'Opponent left the game. You won!' });
           client.game.result="25";

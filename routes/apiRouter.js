@@ -348,7 +348,7 @@ var apiRoomsController = require ('../controllers/apiRoomsController')
   router.put('/api/player/:id', function(req, res) {
     apiPlayersController.update(req, res)
     // #swagger.summary = 'Modify Player. '
-    // #swagger.description = 'Endpoint to modifiy Player filtering by Player Id. '
+    // #swagger.description = 'Endpoint to modifiy Player filtering by Player username. '
     // #swagger.tags = ['Players']
              /* #swagger.responses[200] = {
             description: 'Player Modified.',

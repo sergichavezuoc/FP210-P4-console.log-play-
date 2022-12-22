@@ -1,13 +1,11 @@
 function showResults() {
     $j("#alert-text").html("");
 $j(document).ready(() => {
-    console.log('Button clicked! Running ajax...');
     $j.ajax({
         url: '/getResultsAjax',
         type: 'GET',
         contentType: 'application/json',
         success: (data) => {
-            console.log(data);
             var table = document.createElement("table"), row, cellA, cellB, cellC;
             table.style.padding='5px';
             table.style.border='2px solid';
@@ -33,7 +31,6 @@ $j(document).ready(() => {
               cellC.innerHTML = data[key].winner;
             }
         }
-        console.log(table);
         $j("#alert-text").append(table);
         $j("#myModal").modal("show");
     }
