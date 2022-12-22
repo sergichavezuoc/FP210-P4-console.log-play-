@@ -31,19 +31,20 @@ block content
                     .mb-3.row 
                         label.col-sm-2.col-form-label.text-light Name 
                         .col-sm-9.px-4 
-                            input#name.form-control(type="text" name="name")
+                            input#name.form-control(type="text" name="name" placeholder='Write name' required='')
                     .mb-3.row 
                         label.col-sm-2.col-form-label.text-light Email 
                         .col-sm-9.px-4 
-                            input#email.form-control(type="text" name="username")
+                            input#email.form-control(type="email" name="username" placeholder=' Write email' required='')
                     .mb-3.row 
                         label.col-sm-2.col-form-label.text-light Password
                         .col-sm-9.px-4 
-                            input#password.form-control(type="text" name="password")
+                            input#password.form-control(type="text" name="password" placeholder='Write password' required='')
                     .d-grip.gap-2 
                         button#submit-button.btn.btn-primary.btn-outline-warning.btn.block(type="submit") Sign up 
                     #helper.helper-wrapper 
                         .helper-content 
-                            p.text-helper The data entered is incorrect
+                            p.text-helper The email is already used
+
 block scripts 
     script(src="/javascripts/register.js")   
