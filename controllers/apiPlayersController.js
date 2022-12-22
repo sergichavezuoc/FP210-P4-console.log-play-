@@ -68,7 +68,13 @@ create: function(req, res) {
       })
     }
     if(!player) {
-      //console.log("antes save");
+      if(playerSearched.name == "" || playerSearched.username == "" || playerSearched.password == ""){
+        return res.status(500).json({
+          message: 'Fields cannot be empty!'
+        })
+      }
+
+              //console.log("antes save");
       playerSearched.save(function(err, playerSearched){
         if(err) {
           //console.log("error save");
@@ -83,6 +89,10 @@ create: function(req, res) {
           _id: playerSearched._id
         })
       })
+      
+
+
+
     }
     if(player){
      // console.log("error player already exist");
