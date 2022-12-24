@@ -6,7 +6,7 @@ avatarPicker.addEventListener("click", function () {
   document.getElementById("wrapper-selector").style.display = "flex";
   pressed = true;
 
-  //CHOSE AVAVATAR
+  //CHOSE AVATAR
 
   if (pressed == true) {
     var avatar1 = document.getElementById("item-1");
@@ -63,7 +63,6 @@ function handleSubmit(event) {
   event.preventDefault();
   const data = new FormData(event.target);
   const value = Object.fromEntries(data.entries());
-  console.log(JSON.stringify(value, null, "  "));
   var username = document.getElementById("email").value;
   var name = document.getElementById("name").value;
   $.ajax({
@@ -72,7 +71,6 @@ function handleSubmit(event) {
     contentType: "application/json",
     data: JSON.stringify(value, null, "  "),
     success: (data) => {
-      console.log(data);
       if (data.message == "saved") {
         var newObject = {
           name: name,

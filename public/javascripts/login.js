@@ -12,7 +12,6 @@ function handleSubmit(event) {
         contentType: 'application/json',
         data: JSON.stringify(value, null, '  '),
         success: (data) => {
-            console.log(data);
             if (data.username){
                 var user =JSON.parse(localStorage.getItem("User"));
                 //window.alert(user)

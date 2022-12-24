@@ -148,34 +148,11 @@ const getSalas = (rooms) => {
         }
     )
 }
-const getSala = (idSala, sala) => {
-    MongoClient.connect(
-        DB_URI,
-        (err, db) => {
-            if (err) {
-                console.log("Error connecting Database");
-            }
-            else {
-                db.db("consolelog").collection("salas").findOne({ _id: idSala }, function (err, res) {
-                    if (err) {
-                        console.log("Error locating Room");
-                    }
-                    else {
-                        console.log(sala);
-                        sala = res;
-                        console.log(sala);
-                        db.close();
-                    }
-                });
-            }
-        }
-    )
-}
+
 exports.createConnection = createConnection;
 exports.createCollection = createCollection;
 exports.createCollectionGame = createCollectionGame;
 exports.insertGame = insertGame;
 exports.createCollectionJugadores = createCollectionJugadores;
-exports.getSala = getSala;
 exports.getSalas = getSalas;
 

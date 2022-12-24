@@ -32,7 +32,6 @@ sockserver.on('connection', (ws, req) => {
       });
     }
     if(message.type === 'result'){
-      console.log(ws)
       ws.game.result=message.result;
       ws.game.winner=message.winner
       insertGame(ws.game)
@@ -40,9 +39,7 @@ sockserver.on('connection', (ws, req) => {
         
         roomToDelete.player1="";
         roomToDelete.player2="";
-        console.log(roomToDelete)
         roomToDelete.save(function(err, roomToDelete){
-          console.log(err)
           if(err) {
             return res.status(500).json({
               message: 'Error al guardar la room'
@@ -68,7 +65,6 @@ sockserver.on('connection', (ws, req) => {
     [...clients.keys()].forEach((client) => {
       if (client.room === ws.room && client!=ws) {       
         // guardar en ws.game setresult y setganador
-        console.log("result"+ws.game.result+ client.game.result)
         if (ws.game.result===null && client.game.result===null){
           const data = JSON.stringify({ type: 'close', message: 'Opponent left the game. You won!' });
           client.game.result="25";
@@ -80,10 +76,11 @@ sockserver.on('connection', (ws, req) => {
       }
     })
     Rooms.findOne({number: ws.room}, function(err, roomToDelete){
+      console.log(roomToDelete)
+      console.log(ws.room)
     roomToDelete.player1="";
     roomToDelete.player2="";
     roomToDelete.save(function(err, room){
-      console.log(err)
       if(err) {
         return res.status(500).json({
           message: 'Error al guardar la room'

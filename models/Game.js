@@ -1,23 +1,23 @@
-const Player= require("./Player");
+const Player = require("./Player");
 const Room = require("./Room");
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var gameSchema = new Schema({
-  number: String, 
-  room: String, 
+  number: String,
+  room: String,
   result: Number,
   winner: String,
   player1: String,
-  player2: String 
+  player2: String
 })
 
 var Games = mongoose.model('Games', gameSchema)
 
 
 class Game {
-  
-  constructor(number, room, result, winner,player1,player2) {
+
+  constructor(number, room, result, winner, player1, player2) {
     this.number = number;
     this.room = room;
     this.result = result;
@@ -49,18 +49,18 @@ class Game {
   setRoom(room) {
     this.room = room;
   }
-  getPlayer1(){
+  getPlayer1() {
     return player1;
   }
 
-  getPlayer2(){
+  getPlayer2() {
     return player2;
   }
-  setPlayer1(player1){
+  setPlayer1(player1) {
     this.player1 = player1;
   }
 
-  setPlayer2(player2){
+  setPlayer2(player2) {
     this.player2 = player2;
   }
 }

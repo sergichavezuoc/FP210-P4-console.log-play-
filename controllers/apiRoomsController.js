@@ -96,9 +96,7 @@ module.exports = {
           message: 'Room not found'
         })
       }
-      console.log(room)
       if (room.player1 != "" && room.player2 != "") {
-        console.log(room)
         return res.send('<i id="o' + room2 + '" style="" class="fa fa-users fa-2x"></i>')
       }
       else if (room.player1 === "" && room.player2 === "") {
@@ -112,8 +110,6 @@ module.exports = {
   userinroom: function (req, res) {
     var room2 = req.params.room
     var player = req.params.player
-    console.log(room2);
-    console.log(player);
     previous = false;
     Rooms.findOne({ player1: player }, function (err, room) {
       if (room) {
@@ -142,7 +138,6 @@ module.exports = {
                 })
               }
               if (room.player1 != "" && room.player2 != "") {
-                console.log(room)
                 return res.status(500).json({
                   message: 'Room is full',
                   error: err
@@ -154,7 +149,6 @@ module.exports = {
               else if (room.player2 === "") {
                 room.player2 = player;
               }
-              console.log(room);
               room.save(function (err, room) {
                 console.log(err)
                 if (err) {
@@ -223,17 +217,17 @@ module.exports = {
       return res.json(room)
     })
   },
-  disconectAllRooms: async function(req, res){
+  disconectAllRooms: async function (req, res) {
     var username = req.body.username;
-    try{
-      const data = await  Rooms.updateMany({player1: username}, {$set: {player1: ''}})
-      const data2 = await Rooms.updateMany({player2: username}, {$set: {player2: ''}})
-      if( data.acknowledged && data2.acknowledged){
+    try {
+      const data = await Rooms.updateMany({ player1: username }, { $set: { player1: '' } })
+      const data2 = await Rooms.updateMany({ player2: username }, { $set: { player2: '' } })
+      if (data.acknowledged && data2.acknowledged) {
         return res.json(200, {
           message: 'All rooms left'
-      })
+        })
       }
-    }catch(error){
+    } catch (error) {
       console.log(error)
       return res.json(500, {
         message: 'Error leaving the rooms'
