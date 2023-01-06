@@ -7,6 +7,7 @@ let room = "";
 if (user.room1 == true) { room = "room1" };
 if (user.room2 == true) { room = "room2" };
 if (user.room3 == true) { room = "room3" };
+let allowMovement= false;
 
 
 $(function () {
@@ -66,6 +67,7 @@ webSocket.onmessage = (event) => {
         if (data.message === "Start the game") {
             $(".canvas").css("cursor", "allowed");
             $(".canvas").css("pointer-events", "all");
+            allowMovement=true;
         }
 
         el = document.getElementById('time');
@@ -140,6 +142,8 @@ function makeMove(e) {
         $(".canvas").css("cursor", "not-allowed");
         $(".canvas").css("pointer-events", "none");
     }
+
+    if(allowMovement==true){
     casilla = Number($(this).attr('id')) + 10;
     if (document.getElementById(casilla)) {
         document.getElementById(casilla).style.cursor = "allowed";
@@ -181,14 +185,29 @@ function makeMove(e) {
         document.getElementById(casilla).style.pointerEvents = "all";
     }
     const arr = [11, 12, 13, 14, 15, 21, 22, 23, 24, 25, 31, 32, 33, 34, 35, 41, 42, 43, 44, 45, 51, 52, 53, 54, 55];
+
     for (let i of arr) {
-        if ($('#' + i.toString()).hasClass(localStorage.getItem("mycolor")) || $('#' + i.toString()).hasClass(localStorage.getItem("opponentcolor"))) {
+        if ($('#' + i.toString()).hasClass(localStorage.getItem("mycolor")) || $('#' + i.toString()).hasClass(localStorage.getItem("opponentcolor"))||allowMovement==false) {
+         // if($('.' + localStorage.getItem("opponentcolor")).length == 0) { 
             document.getElementById(i).style.cursor = "not-allowed";
             document.getElementById(i).style.pointerEvents = "none";
         }
-
     }
+
+    /*console.log("opponentColor: "+$('.' + localStorage.getItem("opponentcolor")).length)
+
+    if($('.' + localStorage.getItem("opponentcolor")).length == 0) { 
+    for (let i of arr) {
+          
+            document.getElementById(i).style.cursor = "not-allowed";
+            document.getElementById(i).style.pointerEvents = "none";
+          }
+
+    }*/
+
+
     const messageBody = { type: 'movement', position: $(this).attr('id'), "room": room };
     webSocket.send(JSON.stringify(messageBody));
+}
 };
 
